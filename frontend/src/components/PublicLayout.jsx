@@ -1,10 +1,15 @@
-import React from 'react'
-import { Outlet } from 'react-router'
+ import { Navigate, Outlet } from 'react-router'
+import { useAuth } from '../features/auth/hook/useAuth'
+import Loading from './Loading'
 
 const PublicLayout = () => {
-  return (
-     <Outlet/>
-  )
+ const  {authData ,isLoading}= useAuth()
+ if(isLoading){
+  return <Loading/>
+ }
+
+
+  return  authData ? <Navigate to={"/dashboard/home"}  /> : <Outlet/>
 }
 
 export default PublicLayout

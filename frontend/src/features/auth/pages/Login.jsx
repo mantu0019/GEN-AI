@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hook/useAuth";
 import Loading from "../../../components/Loading";
-
+ 
 const Login = () => {
   const { loginByUser, isLoading, error } = useAuth();
   const navigate = useNavigate();
@@ -29,6 +29,11 @@ const Login = () => {
       console.log("something went wrong from login data fetching", error);
     }
   };
+
+  if(isLoading){
+    return <Loading/>
+  }
+  
 
   return (
     <div className="min-h-screen bg-[#071b1d] flex items-center justify-center p-4 sm:p-8">

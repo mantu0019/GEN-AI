@@ -3,13 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import config from "../config/config.js";
 import tokenBlackListModel from "../model/tokenblacklisting.js";
-
-
-
-
-
-
-
+ 
 
 export const registerUserController = async (req, res) => {
   try {
@@ -158,8 +152,8 @@ export const getMeUserController = async (req, res) => {
   try {
     const userId = req.user;
 
-    const user = await userModel.findById(userId);
-    if (!user) {
+    const userDetail = await userModel.findById(userId);
+    if (!userDetail) {
       return res.status(401).json({
         success: false,
         message: "User not found",
@@ -169,7 +163,7 @@ export const getMeUserController = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "data fetched successfully",
-      user,
+      userDetail,
     });
   } catch (error) {
     console.log("something went wrong from getMe controller", error);

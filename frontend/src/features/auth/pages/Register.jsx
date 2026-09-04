@@ -31,6 +31,10 @@ const Register = () => {
     }
   };
 
+  if(isLoading){
+    return <Loading/>
+  }
+
   return (
     <div className="min-h-screen bg-[#071b1d] flex items-center justify-center p-4 sm:p-8">
       {/* Main Container */}

@@ -1,15 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, registerUser } from "./authAction";
+import { getMeUser, loginUser, logOutUser, registerUser } from "./authAction";
+ 
  
 const authSlice = createSlice({
     name:"auth",
     initialState:{
         authData:null,
-        isLoading:false,
+        isLoading:true,
         error:null
      },
      
      extraReducers:(builder)=>{
+   // register
+
 
       builder.addCase(registerUser.pending,(state,action)=>{
         state.isLoading = true,
@@ -45,8 +48,47 @@ const authSlice = createSlice({
         state.isLoading = false,
         state.error = action.payload || "something went wrong loginnnnnn"
       })
+      
+      // getMe
+      
+      .addCase(getMeUser.pending,(state,action)=>{
+        state.isLoading = true,
+        state.error   = null;
+      })
+      
+      
+      .addCase(getMeUser.fulfilled,(state,action)=>{
+        state.isLoading = false,
+        state.authData = action.payload,
+        state.error = null
 
- 
+      })
+      
+      
+      .addCase(getMeUser.rejected,(state,action)=>{
+        state.isLoading = false,
+        state.error = action.payload || "something went wrong"
+      })
+       //logout
+      
+      .addCase(logOutUser.fulfilled,(state,action)=>{
+        state.isLoading = false,
+        state.authData = action.payload,
+        state.error = null
+       }) 
+  
+    
+
+
+    
+
+
+
+
+
+
+
+
 
      }
 

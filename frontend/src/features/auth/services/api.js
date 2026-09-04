@@ -1,3 +1,4 @@
+import { redirect } from "react-router";
 import { authInstanceApi } from "../../../app/api";
 
 export const register = async ({ username, email, password }) => {
@@ -25,3 +26,23 @@ export const login = async ({ email, password }) => {
 
   }
 };
+
+
+export const getMe = async()=>{
+  try {
+     const res = await authInstanceApi.get("/api/auth/get-me");
+     return res.data;
+  } catch (error) {
+    console.log("something went wrong from getMe services",error)
+    throw error
+  }
+}
+
+export const logOut = async()=>{
+  try {
+    const res = await authInstanceApi.get("/api/auth/logout")
+  } catch (error) {
+    console.log("something went wrong from logOut services",error)
+    throw error
+  }
+}
