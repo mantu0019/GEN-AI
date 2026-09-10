@@ -3,7 +3,7 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-md">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/100 backdrop-blur-md">
       <div className="flex flex-col items-center">
 
         {/* Loader */}

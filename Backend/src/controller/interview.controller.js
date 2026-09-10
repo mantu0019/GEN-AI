@@ -82,7 +82,7 @@ export const getInterviewReportController = async (req, res) => {
       });
     }
     res.status(200).json({
-      success: false,
+      success: true,
       message: "fetched all interview data",
       interViewData,
     });

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { interview, report } from "../services/api";
+import { getAllReport, interview, report } from "../services/api";
 
 export const interviewUser = createAsyncThunk(
   "/api/interview",

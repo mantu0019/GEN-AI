@@ -1,20 +1,31 @@
-import React, { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../auth/hook/useAuth";
 import { useInterview } from "../hooks/useInterview";
 import Loading from "../../../components/Loading";
 import { useNavigate } from "react-router";
-import GetMe from "../../auth/pages/GetMe";
 const MAX_FILE_SIZE = 3 * 1024 * 1024; // 3MB
 
 const Home = () => {
   const { authData } = useAuth();
   const navigate = useNavigate();
-   const {
+  const [reports, setReports] = useState([]);
+  const {
     interviewByUser,
     isLoading,
     error: reduxError,
-    interviewData,
+    getAllReportByUser,
   } = useInterview();
+
+ 
+
+  useEffect(() => {
+    const reports = async () => {
+      const res = await getAllReportByUser();
+      setReports(res.payload.interviewReport);
+    };
+    reports();
+  }, [getAllReportByUser]);
+   
 
   const fileInputRef = useRef(null);
 
@@ -157,26 +168,55 @@ const Home = () => {
 
         <div className="absolute bottom-[-300px] left-[35%] h-[500px] w-[500px] rounded-full bg-orange-500/5 blur-[150px]" />
       </div>
- <button 
- className=" px-4 py-2 rounded bg-green-600 active:scale-95"
- 
- onClick={()=>{
-  navigate("/dashboard/profile")
- 
- }} >My Profile</button>
+      <button
+        onClick={() => navigate("/dashboard/profile")}
+        className="
+    group fixed right-6 top-6 z-50
+    flex items-center gap-2
+    rounded-xl
+    border border-orange-500/20
+    bg-[#111111]/80
+    px-4 py-2.5
+    text-sm font-medium text-zinc-300
+    shadow-lg shadow-black/30
+    backdrop-blur-xl
+    transition-all duration-300
+    hover:border-orange-500/50
+    hover:bg-orange-500/10
+    hover:text-orange-400
+    hover:shadow-orange-500/10
+    active:scale-95
+  "
+      >
+        <span
+          className="
+      flex h-8 w-8 items-center justify-center
+      rounded-lg
+      bg-gradient-to-br from-orange-500/20 to-red-500/20
+      text-orange-400
+      transition-transform duration-300
+      group-hover:scale-110
+    "
+        >
+          👤
+        </span>
+
+        <span>My Profile</span>
+
+        <span className="text-zinc-600 transition-all duration-300 group-hover:translate-x-1 group-hover:text-orange-400">
+          →
+        </span>
+      </button>
       {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-12 sm:px-8">
         {/* Heading */}
         <div className="mb-10 text-center">
-              
-         
           <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
             Create Your Custom{" "}
             <span className="bg-gradient-to-r from-orange-400 via-red-400 to-orange-500 bg-clip-text text-transparent">
               Interview Plan
             </span>
           </h1>
-
 
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-zinc-400 sm:text-base">
             Let our AI analyze the job requirements and your unique profile to
@@ -255,7 +295,7 @@ e.g. "Senior Frontend Engineer at Google requires proficiency in React, TypeScri
                 </span>
 
                 <h2 className="font-semibold text-orange-300">
-                  {authData.user?.username}
+                  {authData.userDetail.username}
                 </h2>
               </div>
 
@@ -475,6 +515,61 @@ e.g. "Senior Frontend Engineer at Google requires proficiency in React, TypeScri
         </div>
 
         {/* Bottom links */}
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {reports.map((elem) => {
+            return (
+              <div
+                key={elem._id}
+                onClick={() => navigate(`/dashboard/interview/${elem._id}`)}
+                className="
+          group cursor-pointer
+          rounded-2xl
+          border border-white/10
+          bg-[#151515]
+          p-5
+          transition-all duration-300
+          hover:-translate-y-1
+          hover:border-orange-500/40
+          hover:bg-[#1b1b1b]
+          hover:shadow-xl
+          hover:shadow-orange-500/10
+          active:scale-[0.98]
+        "
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-zinc-500">Interview Report</p>
+
+                    <h3 className="mt-1 text-lg font-semibold text-white">
+                      AI Interview Analysis
+                    </h3>
+                  </div>
+
+                  <div
+                    className="
+              flex h-12 w-12 items-center justify-center
+              rounded-full
+              border border-orange-500/30
+              bg-orange-500/10
+              text-lg font-bold text-orange-400
+            "
+                  >
+                    {elem.matchScore}%
+                  </div>
+                </div>
+
+                <div className="mt-5 flex items-center justify-between">
+                  <span className="text-xs text-zinc-500">Match Score</span>
+
+                  <span className="text-xs font-medium text-orange-400 transition group-hover:translate-x-1">
+                    View Report →
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
         <div className="mt-6 flex justify-center gap-6 text-[11px] text-zinc-600">
           <button className="transition hover:text-zinc-300">

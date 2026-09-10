@@ -1,15 +1,28 @@
- 
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useInterview } from "../hooks/useInterview";
+import { useParams } from "react-router";
 
 const Interview = () => {
-  const { interviewData } = useInterview();
-
+  const {interviewId}= useParams();
+console.log(interviewId)
  
-  const data =
-    interviewData?.newInterViewReport || interviewData?.interViewData || interviewData;
+  const { interviewData, reportByUser } = useInterview();
 
-  console.log("🔥 INTERVIEW PAGE DATA:", data);
+  useEffect(() => {
+    const fetchInterview = async()=>{
+         if(interviewId){
+           await reportByUser( {interViewDataId:interviewId })
+         }
+    } 
+    fetchInterview()
+  }, [interviewId]);
+
+  const data =
+    interviewData?.newInterViewReport ||
+    interviewData?.interViewData ||
+    interviewData;
+
+  // console.log("🔥 INTERVIEW PAGE DATA:", data);
 
   const [activeSection, setActiveSection] = useState("technical");
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -36,9 +49,7 @@ const Interview = () => {
   const preparationPlan = data?.preparationPlan || [];
 
   const questions =
-    activeSection === "technical"
-      ? technicalQuestions
-      : behavioralQuestions;
+    activeSection === "technical" ? technicalQuestions : behavioralQuestions;
 
   // --------------------------------
   // SEARCH
@@ -59,9 +70,7 @@ const Interview = () => {
         ...q,
         _index: i,
       }))
-      .filter((q) =>
-        q.question?.toLowerCase().includes(term)
-      );
+      .filter((q) => q.question?.toLowerCase().includes(term));
   }, [questions, search]);
 
   const currentQuestion = questions[activeQuestion];
@@ -92,24 +101,15 @@ const Interview = () => {
     if (activeSection === "roadmap") return;
 
     const onKeyDown = (e) => {
-      if (
-        e.target.tagName === "TEXTAREA" ||
-        e.target.tagName === "INPUT"
-      ) {
+      if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") {
         return;
       }
 
-      if (
-        e.key === "ArrowRight" &&
-        activeQuestion < questions.length - 1
-      ) {
+      if (e.key === "ArrowRight" && activeQuestion < questions.length - 1) {
         setActiveQuestion((prev) => prev + 1);
       }
 
-      if (
-        e.key === "ArrowLeft" &&
-        activeQuestion > 0
-      ) {
+      if (e.key === "ArrowLeft" && activeQuestion > 0) {
         setActiveQuestion((prev) => prev - 1);
       }
     };
@@ -175,8 +175,7 @@ const Interview = () => {
     if (!tasks.length) return 0;
 
     const done = tasks.filter(
-      (_, taskIndex) =>
-        completedTasks[`${dayIndex}-${taskIndex}`]
+      (_, taskIndex) => completedTasks[`${dayIndex}-${taskIndex}`],
     ).length;
 
     return Math.round((done / tasks.length) * 100);
@@ -208,26 +207,18 @@ const Interview = () => {
     const technicalTotal = technicalQuestions.length;
     const behavioralTotal = behavioralQuestions.length;
 
-    const technicalDone =
-      reviewed.technical?.size || 0;
+    const technicalDone = reviewed.technical?.size || 0;
 
-    const behavioralDone =
-      reviewed.behavioral?.size || 0;
+    const behavioralDone = reviewed.behavioral?.size || 0;
 
-    const total =
-      technicalTotal + behavioralTotal;
+    const total = technicalTotal + behavioralTotal;
 
-    const done =
-      technicalDone + behavioralDone;
+    const done = technicalDone + behavioralDone;
 
     if (!total) return 0;
 
     return Math.round((done / total) * 100);
-  }, [
-    reviewed,
-    technicalQuestions.length,
-    behavioralQuestions.length,
-  ]);
+  }, [reviewed, technicalQuestions.length, behavioralQuestions.length]);
 
   // --------------------------------
   // LOADING / EMPTY
@@ -253,7 +244,6 @@ const Interview = () => {
 
   return (
     <div className="min-h-screen bg-[#080808] text-white">
-
       {/* Background */}
 
       <div className="fixed inset-0 -z-0 overflow-hidden pointer-events-none">
@@ -265,27 +255,19 @@ const Interview = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1500px] p-3 sm:p-5 lg:p-8">
-
         {/* Main Card */}
 
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#111]/95 shadow-2xl shadow-black/40">
-
           <div className="grid min-h-[750px] grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)_280px]">
-
             {/* ================================= */}
             {/* LEFT SIDEBAR */}
             {/* ================================= */}
 
             <aside className="border-b border-white/10 lg:border-b-0 lg:border-r">
-
               <div className="flex h-full flex-col p-5">
-
                 <div className="mb-6 flex items-center justify-between">
-
                   <div>
-                    <p className="text-xs text-zinc-500">
-                      Interview
-                    </p>
+                    <p className="text-xs text-zinc-500">Interview</p>
 
                     <h1 className="mt-1 text-sm font-semibold text-orange-300">
                       {data?.title || "Interview Plan"}
@@ -295,30 +277,24 @@ const Interview = () => {
                   <span className="text-[10px] text-zinc-500">
                     {overallProgress}%
                   </span>
-
                 </div>
 
                 {/* Progress */}
 
                 <div className="mb-6 h-1.5 overflow-hidden rounded-full bg-white/5">
-
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-orange-400 to-red-500 transition-all duration-500"
                     style={{
                       width: `${overallProgress}%`,
                     }}
                   />
-
                 </div>
 
                 {/* Navigation */}
 
                 <nav className="space-y-2">
-
                   <button
-                    onClick={() =>
-                      handleSectionChange("technical")
-                    }
+                    onClick={() => handleSectionChange("technical")}
                     className={`w-full rounded-lg px-3 py-3 text-left text-sm transition ${
                       activeSection === "technical"
                         ? "bg-gradient-to-r from-orange-500 to-red-500 text-white"
@@ -335,9 +311,7 @@ const Interview = () => {
                   </button>
 
                   <button
-                    onClick={() =>
-                      handleSectionChange("behavioral")
-                    }
+                    onClick={() => handleSectionChange("behavioral")}
                     className={`w-full rounded-lg px-3 py-3 text-left text-sm transition ${
                       activeSection === "behavioral"
                         ? "bg-gradient-to-r from-orange-500 to-red-500 text-white"
@@ -366,86 +340,57 @@ const Interview = () => {
                   >
                     Road Map
                   </button>
-
                 </nav>
 
                 {/* Questions */}
 
                 {activeSection !== "roadmap" && (
-
                   <div className="mt-8 flex min-h-0 flex-1 flex-col">
-
                     <div className="mb-3 flex justify-between">
-
                       <p className="text-xs uppercase tracking-wider text-zinc-600">
                         Questions
                       </p>
 
                       <p className="text-[10px] text-zinc-600">
-                        {
-                          sectionProgress(activeSection).done
-                        }
-                        /
-                        {
-                          sectionProgress(activeSection).total
-                        }
+                        {sectionProgress(activeSection).done}/
+                        {sectionProgress(activeSection).total}
                       </p>
-
                     </div>
 
                     <input
                       value={search}
-                      onChange={(e) =>
-                        setSearch(e.target.value)
-                      }
+                      onChange={(e) => setSearch(e.target.value)}
                       placeholder="Search questions..."
                       className="mb-3 w-full rounded-lg border border-white/10 bg-[#191919] px-3 py-2 text-xs text-zinc-200 outline-none placeholder:text-zinc-600 focus:border-orange-500/50"
                     />
 
                     <div className="max-h-[380px] space-y-1 overflow-y-auto">
-
                       {filteredQuestions.map((item) => (
-
                         <button
                           key={item._index}
-                          onClick={() =>
-                            setActiveQuestion(item._index)
-                          }
+                          onClick={() => setActiveQuestion(item._index)}
                           className={`w-full rounded-lg px-3 py-2 text-left text-xs ${
                             activeQuestion === item._index
                               ? "bg-white/10 text-white"
                               : "text-zinc-500 hover:bg-white/5"
                           }`}
                         >
-
                           <div className="flex items-center gap-2">
-
                             <span
                               className={`h-1.5 w-1.5 rounded-full ${
-                                reviewed[activeSection]?.has(
-                                  item._index
-                                )
+                                reviewed[activeSection]?.has(item._index)
                                   ? "bg-orange-400"
                                   : "bg-zinc-700"
                               }`}
                             />
-
                             Question {item._index + 1}
-
                           </div>
-
                         </button>
-
                       ))}
-
                     </div>
-
                   </div>
-
                 )}
-
               </div>
-
             </aside>
 
             {/* ================================= */}
@@ -453,17 +398,12 @@ const Interview = () => {
             {/* ================================= */}
 
             <main className="min-w-0">
-
               <div className="min-h-[750px] p-5 sm:p-8">
-
                 {/* ROADMAP */}
 
                 {activeSection === "roadmap" ? (
-
                   <div className="mx-auto max-w-3xl">
-
                     <div className="mb-8">
-
                       <p className="text-xs uppercase tracking-widest text-zinc-500">
                         AI Preparation Plan
                       </p>
@@ -471,145 +411,98 @@ const Interview = () => {
                       <h1 className="mt-2 text-3xl font-semibold">
                         {preparationPlan.length}-Day Roadmap
                       </h1>
-
                     </div>
 
                     <div className="space-y-3">
+                      {preparationPlan.map((day, dayIndex) => {
+                        const completion = dayCompletion(day, dayIndex);
 
-                      {preparationPlan.map(
-                        (day, dayIndex) => {
-
-                          const completion =
-                            dayCompletion(
-                              day,
-                              dayIndex
-                            );
-
-                          return (
-
-                            <div
-                              key={dayIndex}
-                              className="overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]"
+                        return (
+                          <div
+                            key={dayIndex}
+                            className="overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]"
+                          >
+                            <button
+                              onClick={() =>
+                                setActiveDay(
+                                  activeDay === dayIndex ? -1 : dayIndex,
+                                )
+                              }
+                              className="flex w-full items-center justify-between p-4 text-left hover:bg-white/5"
                             >
-
-                              <button
-                                onClick={() =>
-                                  setActiveDay(
-                                    activeDay === dayIndex
-                                      ? -1
-                                      : dayIndex
-                                  )
-                                }
-                                className="flex w-full items-center justify-between p-4 text-left hover:bg-white/5"
-                              >
-
-                                <div className="flex items-center gap-4">
-
-                                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-xs">
-                                    {day.day}
-                                  </span>
-
-                                  <div>
-
-                                    <p className="text-sm text-zinc-200">
-                                      {day.focus}
-                                    </p>
-
-                                    <p className="mt-1 text-[10px] text-zinc-600">
-                                      {completion}% complete
-                                    </p>
-
-                                  </div>
-
-                                </div>
-
-                                <span className="text-zinc-500">
-                                  {activeDay === dayIndex
-                                    ? "−"
-                                    : "+"}
+                              <div className="flex items-center gap-4">
+                                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-xs">
+                                  {day.day}
                                 </span>
 
-                              </button>
+                                <div>
+                                  <p className="text-sm text-zinc-200">
+                                    {day.focus}
+                                  </p>
 
-                              {activeDay === dayIndex && (
-
-                                <div className="border-t border-white/10 px-5 py-4">
-
-                                  <div className="space-y-3">
-
-                                    {day.task?.map(
-                                      (task, taskIndex) => {
-
-                                        const key = `${dayIndex}-${taskIndex}`;
-
-                                        const done =
-                                          !!completedTasks[key];
-
-                                        return (
-
-                                          <div
-                                            key={taskIndex}
-                                            className="flex gap-3"
-                                          >
-
-                                            <button
-                                              onClick={() =>
-                                                toggleTask(
-                                                  dayIndex,
-                                                  taskIndex
-                                                )
-                                              }
-                                              className={`mt-1 h-4 w-4 rounded border ${
-                                                done
-                                                  ? "border-orange-400 bg-orange-400 text-black"
-                                                  : "border-zinc-600"
-                                              }`}
-                                            >
-                                              {done && "✓"}
-                                            </button>
-
-                                            <p
-                                              className={`text-sm leading-6 ${
-                                                done
-                                                  ? "text-zinc-600 line-through"
-                                                  : "text-zinc-400"
-                                              }`}
-                                            >
-                                              {task}
-                                            </p>
-
-                                          </div>
-
-                                        );
-                                      }
-                                    )}
-
-                                  </div>
-
+                                  <p className="mt-1 text-[10px] text-zinc-600">
+                                    {completion}% complete
+                                  </p>
                                 </div>
+                              </div>
 
-                              )}
+                              <span className="text-zinc-500">
+                                {activeDay === dayIndex ? "−" : "+"}
+                              </span>
+                            </button>
 
-                            </div>
+                            {activeDay === dayIndex && (
+                              <div className="border-t border-white/10 px-5 py-4">
+                                <div className="space-y-3">
+                                  {day.task?.map((task, taskIndex) => {
+                                    const key = `${dayIndex}-${taskIndex}`;
 
-                          );
-                        }
-                      )}
+                                    const done = !!completedTasks[key];
 
+                                    return (
+                                      <div
+                                        key={taskIndex}
+                                        className="flex gap-3"
+                                      >
+                                        <button
+                                          onClick={() =>
+                                            toggleTask(dayIndex, taskIndex)
+                                          }
+                                          className={`mt-1 h-4 w-4 rounded border ${
+                                            done
+                                              ? "border-orange-400 bg-orange-400 text-black"
+                                              : "border-zinc-600"
+                                          }`}
+                                        >
+                                          {done && "✓"}
+                                        </button>
+
+                                        <p
+                                          className={`text-sm leading-6 ${
+                                            done
+                                              ? "text-zinc-600 line-through"
+                                              : "text-zinc-400"
+                                          }`}
+                                        >
+                                          {task}
+                                        </p>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
-
                   </div>
-
                 ) : currentQuestion ? (
-
                   /* QUESTION */
 
                   <div className="flex min-h-[700px] items-center">
-
                     <div className="mx-auto w-full max-w-3xl">
-
                       <div className="mb-8 flex items-center justify-between">
-
                         <span className="rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-xs text-orange-300">
                           {activeSection === "technical"
                             ? "Technical"
@@ -617,10 +510,8 @@ const Interview = () => {
                         </span>
 
                         <span className="text-xs text-zinc-600">
-                          {activeQuestion + 1} /{" "}
-                          {questions.length}
+                          {activeQuestion + 1} / {questions.length}
                         </span>
-
                       </div>
 
                       <h1 className="text-2xl font-medium leading-relaxed text-zinc-100 sm:text-3xl">
@@ -630,20 +521,14 @@ const Interview = () => {
                       {/* Practiced */}
 
                       <button
-                        onClick={() =>
-                          toggleReviewed(activeQuestion)
-                        }
+                        onClick={() => toggleReviewed(activeQuestion)}
                         className={`mt-6 rounded-lg border px-3 py-2 text-xs ${
-                          reviewed[activeSection]?.has(
-                            activeQuestion
-                          )
+                          reviewed[activeSection]?.has(activeQuestion)
                             ? "border-orange-400/40 bg-orange-500/10 text-orange-300"
                             : "border-white/10 text-zinc-400"
                         }`}
                       >
-                        {reviewed[activeSection]?.has(
-                          activeQuestion
-                        )
+                        {reviewed[activeSection]?.has(activeQuestion)
                           ? "✓ Practiced"
                           : "Mark as practiced"}
                       </button>
@@ -651,7 +536,6 @@ const Interview = () => {
                       {/* Intention */}
 
                       <div className="mt-8">
-
                         <p className="mb-3 text-xs uppercase tracking-widest text-zinc-600">
                           What interviewer is checking
                         </p>
@@ -659,48 +543,34 @@ const Interview = () => {
                         <p className="text-sm leading-7 text-zinc-400">
                           {currentQuestion.intention}
                         </p>
-
                       </div>
 
                       {/* Answer approach */}
 
                       <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.02] p-5">
-
                         <button
-                          onClick={() =>
-                            setShowApproach(
-                              (prev) => !prev
-                            )
-                          }
+                          onClick={() => setShowApproach((prev) => !prev)}
                           className="flex w-full justify-between text-left"
                         >
-
                           <span className="text-xs uppercase tracking-widest text-zinc-600">
                             Answer Approach
                           </span>
 
                           <span className="text-xs text-orange-300">
-                            {showApproach
-                              ? "Hide"
-                              : "Reveal"}
+                            {showApproach ? "Hide" : "Reveal"}
                           </span>
-
                         </button>
 
                         {showApproach && (
-
                           <p className="mt-4 text-sm leading-7 text-zinc-300">
                             {currentQuestion.answerApproach}
                           </p>
-
                         )}
-
                       </div>
 
                       {/* Notes */}
 
                       <div className="mt-6">
-
                         <p className="mb-2 text-xs uppercase tracking-widest text-zinc-600">
                           Your Draft Answer
                         </p>
@@ -716,56 +586,35 @@ const Interview = () => {
                           placeholder="Write your answer here..."
                           className="h-32 w-full resize-none rounded-xl border border-white/10 bg-[#191919] p-4 text-sm text-zinc-200 outline-none placeholder:text-zinc-600 focus:border-orange-500/50"
                         />
-
                       </div>
 
                       {/* Buttons */}
 
                       <div className="mt-8 flex justify-between">
-
                         <button
                           disabled={activeQuestion === 0}
-                          onClick={() =>
-                            setActiveQuestion(
-                              (prev) => prev - 1
-                            )
-                          }
+                          onClick={() => setActiveQuestion((prev) => prev - 1)}
                           className="rounded-lg border border-white/10 px-4 py-2 text-sm text-zinc-300 disabled:opacity-30"
                         >
                           ← Previous
                         </button>
 
                         <button
-                          disabled={
-                            activeQuestion ===
-                            questions.length - 1
-                          }
-                          onClick={() =>
-                            setActiveQuestion(
-                              (prev) => prev + 1
-                            )
-                          }
+                          disabled={activeQuestion === questions.length - 1}
+                          onClick={() => setActiveQuestion((prev) => prev + 1)}
                           className="rounded-lg bg-gradient-to-r from-orange-500 to-red-500 px-5 py-2 text-sm font-medium"
                         >
                           Next →
                         </button>
-
                       </div>
-
                     </div>
-
                   </div>
-
                 ) : (
-
                   <div className="flex min-h-[700px] items-center justify-center text-zinc-500">
                     No questions available.
                   </div>
-
                 )}
-
               </div>
-
             </main>
 
             {/* ================================= */}
@@ -773,9 +622,7 @@ const Interview = () => {
             {/* ================================= */}
 
             <aside className="border-t border-white/10 p-5 lg:border-t-0">
-
               <div className="sticky top-6">
-
                 <p className="text-xs uppercase tracking-widest text-zinc-600">
                   Interview Analysis
                 </p>
@@ -791,129 +638,92 @@ const Interview = () => {
                 {/* Skill gaps */}
 
                 <div className="mt-5 space-y-2">
-
-                  {skillGaps.map(
-                    (item, index) => (
-
-                      <div
-                        key={index}
-                        className={`rounded-xl border p-3 ${
-                          item.severity === "high"
-                            ? "border-red-500/30 bg-red-500/5"
-                            : item.severity === "medium"
+                  {skillGaps.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`rounded-xl border p-3 ${
+                        item.severity === "high"
+                          ? "border-red-500/30 bg-red-500/5"
+                          : item.severity === "medium"
                             ? "border-orange-500/20 bg-orange-500/5"
                             : "border-white/10 bg-white/[0.02]"
-                        }`}
-                      >
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-zinc-300">
+                          {item.skill}
+                        </span>
 
-                        <div className="flex items-center justify-between">
-
-                          <span className="text-sm text-zinc-300">
-                            {item.skill}
-                          </span>
-
-                          <span
-                            className={`text-[10px] uppercase ${
-                              item.severity === "high"
-                                ? "text-red-400"
-                                : item.severity === "medium"
+                        <span
+                          className={`text-[10px] uppercase ${
+                            item.severity === "high"
+                              ? "text-red-400"
+                              : item.severity === "medium"
                                 ? "text-orange-400"
                                 : "text-zinc-500"
-                            }`}
-                          >
-                            {item.severity}
-                          </span>
-
-                        </div>
-
+                          }`}
+                        >
+                          {item.severity}
+                        </span>
                       </div>
-
-                    )
-                  )}
-
+                    </div>
+                  ))}
                 </div>
 
                 {/* Match Score */}
 
                 <div className="mt-8 border-t border-white/10 pt-6">
-
                   <p className="text-xs uppercase tracking-widest text-zinc-600">
                     Resume Match
                   </p>
 
                   <div className="mt-3 flex items-end gap-2">
-
                     <span className="text-5xl font-semibold text-transparent bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text">
                       {data?.matchScore ?? 0}
                     </span>
 
-                    <span className="mb-2 text-sm text-zinc-600">
-                      / 100
-                    </span>
-
+                    <span className="mb-2 text-sm text-zinc-600">/ 100</span>
                   </div>
 
                   <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/5">
-
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-orange-400 to-red-500"
                       style={{
                         width: `${data?.matchScore ?? 0}%`,
                       }}
                     />
-
                   </div>
-
                 </div>
 
                 {/* Priority */}
 
                 <div className="mt-8 border-t border-white/10 pt-6">
-
                   <p className="text-xs uppercase tracking-widest text-zinc-600">
                     Highest Priority
                   </p>
 
                   <div className="mt-4 space-y-3">
-
                     {skillGaps
-                      .filter(
-                        (item) =>
-                          item.severity === "high"
-                      )
+                      .filter((item) => item.severity === "high")
                       .map((item, index) => (
-
                         <div
                           key={index}
                           className="flex items-center justify-between"
                         >
-
                           <span className="text-sm text-zinc-300">
                             {item.skill}
                           </span>
 
-                          <span className="text-xs text-red-400">
-                            HIGH
-                          </span>
-
+                          <span className="text-xs text-red-400">HIGH</span>
                         </div>
-
                       ))}
-
                   </div>
-
                 </div>
-
               </div>
-
             </aside>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 };
