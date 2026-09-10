@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hook/useAuth";
@@ -7,7 +7,6 @@ import Loading from "../../../components/Loading";
 const Register = () => {
   const { isLoading, registerByUser, error } = useAuth();
   const navigate = useNavigate();
-   
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -24,123 +23,170 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       await registerByUser(data).unwrap();
-       
-       navigate("/dashboard/home")
+      navigate("/dashboard/home");
     } catch (error) {
       console.log("something went wrong from register data fetching", error);
     }
   };
 
-  if(isLoading){
-    return <Loading/>
-  }
+  if (isLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen bg-[#071b1d] flex items-center justify-center p-4 sm:p-8">
+    <main className="min-h-screen bg-[#080808] text-white flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+
+      {/* Background Glow */}
+      <div className="absolute w-[450px] h-[450px] bg-orange-600/10 rounded-full blur-[150px] -top-40 -left-40" />
+      <div className="absolute w-[400px] h-[400px] bg-red-600/10 rounded-full blur-[160px] -bottom-40 -right-40" />
+
       {/* Main Container */}
-      <div className="w-full max-w-6xl bg-white rounded-[28px] overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-2">
+      <div className="relative z-10 w-full max-w-5xl bg-[#111111] border border-white/10 rounded-3xl overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-2">
+
         {/* ================= LEFT SIDE ================= */}
-        <div className="relative min-h-[600px] lg:min-h-[650px] bg-[#0d657b] overflow-hidden">
-          {/* Background effects */}
-          <div className="absolute inset-0">
-            <div className="absolute w-[500px] h-[500px] bg-[#063b49] rounded-full blur-3xl opacity-70 -top-40 -left-40" />
+        <div className="relative hidden lg:block min-h-[620px] bg-[#0d0d0d] overflow-hidden">
 
-            <div className="absolute w-[400px] h-[400px] bg-[#24a7bd] rounded-full blur-3xl opacity-20 bottom-[-150px] right-[-100px]" />
+          {/* Glow */}
+          <div className="absolute w-[450px] h-[450px] bg-orange-600/10 rounded-full blur-[130px] -top-40 -left-40" />
+          <div className="absolute w-[350px] h-[350px] bg-red-600/10 rounded-full blur-[130px] -bottom-40 -right-40" />
 
-            {/* Grid */}
-            <div
-              className="absolute inset-0 opacity-10"
-              style={{
-                backgroundImage:
-                  "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
-                backgroundSize: "40px 40px",
-              }}
-            />
-          </div>
+          {/* Grid */}
+          <div
+            className="absolute inset-0 opacity-[0.035]"
+            style={{
+              backgroundImage:
+                "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
 
-          {/* Content */}
-          <div className="relative z-10 h-full flex flex-col justify-between p-8 sm:p-12">
+          <div className="relative z-10 h-full flex flex-col justify-between p-9">
+
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center">
-                <span className="text-[#0d657b] font-black text-xl">AI</span>
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
+                <span className="font-black text-lg">AI</span>
               </div>
 
-              <span className="text-white text-xl font-bold tracking-wide">
+              <span className="text-xl font-bold tracking-wide">
                 Genova
               </span>
             </div>
 
-            {/* Main text */}
-            <div className="max-w-md mt-16 lg:mt-0">
-              <p className="text-white/70 text-sm font-semibold tracking-[3px] uppercase mb-5">
-                Build With AI
+            {/* Main Content */}
+            <div className="max-w-md">
+
+              <p className="text-orange-400 text-xs font-semibold tracking-[3px] uppercase mb-4">
+                Start Your Journey
               </p>
 
-              <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
-                Your ideas.
+              <h1 className="text-4xl xl:text-5xl font-bold leading-[1.08]">
+                Build your career.
                 <br />
-                Your vision.
-                <br />
-                <span className="text-[#9ce7ed]">Your AI.</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
+                  Master your interview.
+                </span>
               </h1>
 
-              <p className="mt-6 text-white/75 text-sm sm:text-base leading-7 max-w-sm">
-                Create your account and start generating powerful ideas, content
-                and experiences with next-generation AI.
+              <p className="mt-5 text-zinc-400 text-sm leading-6 max-w-sm">
+                Create your Genova account and get AI-powered interview
+                preparation, personalized questions, skill-gap analysis,
+                and a focused preparation roadmap.
               </p>
+
+              {/* Features */}
+              <div className="mt-7 space-y-3">
+
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400">
+                    ✓
+                  </div>
+                  <span className="text-sm text-zinc-300">
+                    AI-powered interview preparation
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400">
+                    ✓
+                  </div>
+                  <span className="text-sm text-zinc-300">
+                    Personalized technical & behavioral questions
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400">
+                    ✓
+                  </div>
+                  <span className="text-sm text-zinc-300">
+                    Smart skill-gap analysis
+                  </span>
+                </div>
+
+              </div>
             </div>
 
             {/* Bottom */}
-            <div className="flex items-end justify-between mt-16">
+            <div className="flex items-center justify-between">
+
               <div>
-                <p className="text-white/50 text-xs uppercase tracking-widest">
-                  Start creating
+                <p className="text-zinc-600 text-[10px] uppercase tracking-[3px]">
+                  Powered by AI
                 </p>
 
-                <p className="text-white font-semibold mt-1">Your AI journey</p>
+                <p className="text-zinc-300 text-sm font-medium mt-1">
+                  Prepare. Practice. Succeed.
+                </p>
               </div>
 
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-black flex items-center justify-center border-4 border-white/10">
-                <span className="text-[#9ce7ed] text-xs font-black tracking-widest">
+              <div className="w-16 h-16 rounded-full border border-orange-500/20 bg-orange-500/5 flex items-center justify-center">
+                <span className="text-orange-400 text-[10px] font-black tracking-widest">
                   GEN AI
                 </span>
               </div>
+
             </div>
           </div>
         </div>
 
         {/* ================= RIGHT SIDE ================= */}
-        <div className="bg-[#f8f8f6] flex items-center justify-center p-8 sm:p-12 lg:p-14">
+        <div className="bg-[#111111] flex items-center justify-center p-6 sm:p-8">
+
           <div className="w-full max-w-sm">
+
             {/* Heading */}
-            <div className="mb-7">
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#101718]">
+            <div className="mb-5">
+              <p className="text-orange-400 text-xs font-semibold uppercase tracking-[2px] mb-2">
+                Join Genova
+              </p>
+
+              <h2 className="text-3xl font-bold">
                 Create account
               </h2>
 
-              <p className="mt-3 text-sm text-gray-500">
-                Enter your details to get started.
+              <p className="text-zinc-500 text-sm mt-2">
+                Create your account and start preparing smarter.
               </p>
             </div>
+
+            {/* Error */}
             {error && (
-              <div className="bg-red-100 text-red-600 px-4 py-2 rounded mb-4">
+              <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-3 py-2 rounded-lg text-sm mb-4">
                 {error}
               </div>
             )}
-            {/* Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              {/* ================= USERNAME ================= */}
+
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-3"
+            >
+
+              {/* Username */}
               <div>
-                <label
-                  htmlFor="username"
-                  className="block text-sm font-medium text-[#202526] mb-2"
-                >
+                <label className="block text-xs text-zinc-400 mb-1.5">
                   Username
                 </label>
 
                 <input
-                  id="username"
                   type="text"
                   placeholder="Enter your username"
                   {...register("username", {
@@ -150,29 +196,27 @@ const Register = () => {
                       message: "Username must be at least 3 characters",
                     },
                   })}
-                  className={`w-full h-11 px-4 rounded-lg border ${
-                    errors.username ? "border-red-500" : "border-gray-300"
-                  } bg-white outline-none text-sm transition focus:border-[#0d657b] focus:ring-2 focus:ring-[#0d657b]/10`}
+                  className={`w-full h-10 px-3 rounded-lg bg-[#191919] border ${
+                    errors.username
+                      ? "border-red-500"
+                      : "border-white/10"
+                  } text-white text-sm placeholder:text-zinc-600 outline-none focus:border-orange-500 transition`}
                 />
 
                 {errors.username && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="text-red-400 text-xs mt-1">
                     {errors.username.message}
                   </p>
                 )}
               </div>
 
-              {/* ================= EMAIL ================= */}
+              {/* Email */}
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-[#202526] mb-2"
-                >
+                <label className="block text-xs text-zinc-400 mb-1.5">
                   Email
                 </label>
 
                 <input
-                  id="email"
                   type="email"
                   placeholder="Enter your email"
                   {...register("email", {
@@ -182,30 +226,28 @@ const Register = () => {
                       message: "Enter a valid email address",
                     },
                   })}
-                  className={`w-full h-11 px-4 rounded-lg border ${
-                    errors.email ? "border-red-500" : "border-gray-300"
-                  } bg-white outline-none text-sm transition focus:border-[#0d657b] focus:ring-2 focus:ring-[#0d657b]/10`}
+                  className={`w-full h-10 px-3 rounded-lg bg-[#191919] border ${
+                    errors.email
+                      ? "border-red-500"
+                      : "border-white/10"
+                  } text-white text-sm placeholder:text-zinc-600 outline-none focus:border-orange-500 transition`}
                 />
 
                 {errors.email && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="text-red-400 text-xs mt-1">
                     {errors.email.message}
                   </p>
                 )}
               </div>
 
-              {/* ================= PASSWORD ================= */}
+              {/* Password */}
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-[#202526] mb-2"
-                >
+                <label className="block text-xs text-zinc-400 mb-1.5">
                   Password
                 </label>
 
                 <div className="relative">
                   <input
-                    id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Create a password"
                     {...register("password", {
@@ -215,40 +257,37 @@ const Register = () => {
                         message: "Password must be at least 6 characters",
                       },
                     })}
-                    className={`w-full h-11 px-4 pr-12 rounded-lg border ${
-                      errors.password ? "border-red-500" : "border-gray-300"
-                    } bg-white outline-none text-sm transition focus:border-[#0d657b] focus:ring-2 focus:ring-[#0d657b]/10`}
+                    className={`w-full h-10 px-3 pr-11 rounded-lg bg-[#191919] border ${
+                      errors.password
+                        ? "border-red-500"
+                        : "border-white/10"
+                    } text-white text-sm placeholder:text-zinc-600 outline-none focus:border-orange-500 transition`}
                   />
 
-                  {/* Show / Hide Password */}
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#0d657b] text-lg"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-orange-400"
                   >
                     {showPassword ? "🙈" : "👁️"}
                   </button>
                 </div>
 
                 {errors.password && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="text-red-400 text-xs mt-1">
                     {errors.password.message}
                   </p>
                 )}
               </div>
 
-              {/* ================= CONFIRM PASSWORD ================= */}
+              {/* Confirm Password */}
               <div>
-                <label
-                  htmlFor="confirmPassword"
-                  className="block text-sm font-medium text-[#202526] mb-2"
-                >
+                <label className="block text-xs text-zinc-400 mb-1.5">
                   Confirm password
                 </label>
 
                 <div className="relative">
                   <input
-                    id="confirmPassword"
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="Confirm your password"
                     {...register("confirmPassword", {
@@ -256,76 +295,83 @@ const Register = () => {
                       validate: (value) =>
                         value === password || "Passwords do not match",
                     })}
-                    className={`w-full h-11 px-4 pr-12 rounded-lg border ${
+                    className={`w-full h-10 px-3 pr-11 rounded-lg bg-[#191919] border ${
                       errors.confirmPassword
                         ? "border-red-500"
-                        : "border-gray-300"
-                    } bg-white outline-none text-sm transition focus:border-[#0d657b] focus:ring-2 focus:ring-[#0d657b]/10`}
+                        : "border-white/10"
+                    } text-white text-sm placeholder:text-zinc-600 outline-none focus:border-orange-500 transition`}
                   />
 
-                  {/* Show / Hide Confirm Password */}
                   <button
                     type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#0d657b] text-lg"
+                    onClick={() =>
+                      setShowConfirmPassword(!showConfirmPassword)
+                    }
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-orange-400"
                   >
                     {showConfirmPassword ? "🙈" : "👁️"}
                   </button>
                 </div>
 
                 {errors.confirmPassword && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="text-red-400 text-xs mt-1">
                     {errors.confirmPassword.message}
                   </p>
                 )}
               </div>
 
-              {/* ================= TERMS ================= */}
-              <label className="flex items-start gap-2 cursor-pointer pt-1">
+              {/* Terms */}
+              <label className="flex items-center gap-2 pt-1 cursor-pointer">
                 <input
                   type="checkbox"
-                  className="mt-0.5 w-4 h-4 accent-[#0d657b]"
+                  className="w-4 h-4 accent-orange-500"
                   {...register("terms", {
                     required: "You must accept the terms",
                   })}
                 />
 
-                <span className="text-xs text-gray-500 leading-5">
-                  I agree to the{" "}
-                  <span className="text-[#0d657b] font-semibold">
+                <span className="text-xs text-zinc-500">
+                  I agree to{" "}
+                  <span className="text-orange-400 font-medium">
                     Terms & Conditions
                   </span>
                 </span>
               </label>
 
               {errors.terms && (
-                <p className="text-red-500 text-xs">{errors.terms.message}</p>
+                <p className="text-red-400 text-xs">
+                  {errors.terms.message}
+                </p>
               )}
 
-              {/* ================= REGISTER BUTTON ================= */}
+              {/* Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="active:scale-95 w-full h-12 bg-[#0d657b] text-white rounded-lg font-semibold disabled:opacity-60 disabled:cursor-not-allowed transition"
+                className="w-full h-10 mt-2 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-semibold hover:opacity-90 active:scale-[0.98] transition disabled:opacity-50"
               >
-                {isSubmitting ? "Account Creating..." : "Create Account"}
+                {isSubmitting
+                  ? "Account Creating..."
+                  : "Create Account"}
               </button>
+
             </form>
 
-            {/* ================= LOGIN ================= */}
-            <p className="text-center text-sm text-gray-500 mt-7">
+            {/* Login */}
+            <p className="text-center text-xs text-zinc-500 mt-5">
               Already have an account?{" "}
               <Link
-                to={"/"}
-                className="font-semibold text-[#0d657b] hover:underline"
+                to="/"
+                className="text-orange-400 font-semibold hover:text-orange-300"
               >
                 Sign in
               </Link>
             </p>
+
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

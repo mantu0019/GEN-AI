@@ -1,0 +1,764 @@
+on between React and Express.',
+      answerApproach: 'Explain Cross-Origin Resource Sharing (CORS) as a browser security mechanism blocking requests from a different origin. Describe configuring the `cors` middleware in Express by specifying allowed origins, methods, credentials, and allowed headers.'
+    },
+    {
+      question: 'Explain the difference between process.nextTick(), setImmediate(), and setTimeout() in Node.js.',
+      intention: 'To test deep technical mastery of Node.js execution order and event loop prioritization.',
+      answerApproach: 'Clarify that process.nextTick runs before any other microtasks or phase transitions. setImmediate executes in the Check phase of the current event loop iteration, while setTimeout executes in the Timers phase after a specified minimum delay.'
+    }
+  ],
+  behavioralQuestion: [
+    {
+      question: 'Describe a complex bug you encountered in your Full Stack E-commerce application and how you resolved it.',
+      intention: 'To assess problem-solving methodology, debugging capabilities, and perseverance under technical challenges.',
+      answerApproach: 'Use the STAR method. Describe the symptom (e.g., state desynchronization in cart or authentication failure), detail the tools used (DevTools, Postman, console logs, network tab), explain the root cause found, and describe the solution implemented along with steps taken to prevent recurrence.'
+    },
+    {
+      question: 'How do you prioritize frontend versus backend tasks when building a full-stack feature from scratch?',
+      intention: 'To evaluate project management, structured planning, and architectural workflow.',
+      answerApproach: 'Explain an API-first approach: define data models and API contracts first, build and test backend endpoints using Postman, and then integrate frontend UI with those endpoints while maintaining clear separation of concerns.'
+    },
+    {
+      question: 'Tell me about a time you had to make a technical tradeoff during project development.',
+      intention: 'To evaluate technical decision-making and understanding of trade-offs between speed, scalability, and complexity.',
+      answerApproach: 'Describe a specific scenario, such as choosing simple JWT in localStorage for a prototype versus HTTP-only cookies, or choosing MongoDB over SQL for flexible schemas. Explain why the trade-off was reasonable for the project scope and what you would improve for production.'
+    },
+    {
+      question: 'How do you approach learning a new technology or concept when working on a project?',
+      intention: 'To gauge self-directed learning capability, adaptability, and commitment to continuous growth.',
+      answerApproach: 'Describe a structured learning process: reading official documentation, building a small hands-on proof-of-concept project, following community best practices, and applying the new concept to a real application.'
+    },
+    {
+      question: 'How do you ensure your code is clean, well-documented, and easy for other developers to read?',
+      intention: 'To assess code quality standards, team readiness, and maintainability practices.',
+      answerApproach: 'Discuss writing self-documenting variable and function names, adhering to standard ESLint formatting, writing modular component structures, enforcing single responsibility principle, and writing clear commits and pull request descriptions.'
+    }
+  ],
+  skillGap: [
+    { skill: 'TypeScript & Static Typing', severity: 'medium' },
+    {
+      skill: 'Automated Testing (Jest, React Testing Library, Supertest)',
+      severity: 'medium'
+    },
+    {
+      skill: 'Database Indexing & Advanced MongoDB Aggregations',
+      severity: 'medium'
+    },
+    {
+      skill: 'DevOps & Deployment Basics (Docker, CI/CD, Nginx)',
+      severity: 'low'
+    },
+    {
+      skill: 'Data Structures & Algorithms (DSA) Problem Solving',
+      severity: 'medium'
+    }
+  ],
+  preparationPlan: [
+    {
+      day: 1,
+      focus: 'Advanced JavaScript Fundamentals & Asynchronous Patterns',
+      task: [
+        'Study JavaScript Closures, Execution Context, Event Loop, and Microtask queue.',
+        'Implement a custom Promise polyfill or practice Promise chaining and async/await error handling.',
+        'Solve 3 medium JavaScript coding challenges focusing on array methods and objects.'
+      ]
+    },
+    {
+      day: 2,
+      focus: 'React Core Concepts & Performance Optimization',
+      task: [
+        'Review React reconciliation, Virtual DOM, and hook dependencies.',
+        'Optimize component render cycles using React.memo, useMemo, and useCallback in a sample app.',
+        'Implement custom React hooks for API fetching and debounce logic.'
+      ]
+    },
+    {
+      day: 3,
+      focus: 'Backend Security, JWT Auth & Middleware Design',
+      task: [
+        'Implement HTTP-only cookie-based JWT authentication with refresh tokens in Express.',
+        'Add security middleware using Helmet, express-rate-limit, and custom error handling middleware.',
+        'Test and secure API routes using Postman and environment variables.'
+      ]
+    },
+    {
+      day: 4,
+      focus: 'MongoDB Schema Design, Indexing & Aggregations',
+      task: [
+        'Design relational schemas in Mongoose with embedding vs referencing.',
+        'Create indexes on MongoDB collections and analyze execution plans using explain().',
+        'Write complex aggregation pipelines for user analytics or e-commerce metrics.'
+      ]
+    },
+    {
+      day: 5,
+      focus: 'Data Structures & Algorithms (DSA) Essentials',
+      task: [
+        'Review core data structures: Hash Maps, Two Pointers, and Sliding Window techniques.',
+        'Solve 4 LeetCode array and string questions commonly asked in MERN interviews.',
+        'Analyze time and space complexity (Big O notation) for each solution.'
+      ]
+    },
+    {
+      day: 6,
+      focus: 'TypeScript Basics & Integration with Express/React',
+      task: [
+        'Learn basic TypeScript syntax, interfaces, types, and generics.',
+        'Convert a basic React component and Express route to TypeScript.',
+        'Set up tsconfig.json and understand type safety benefits for full-stack applications.'
+      ]
+    },
+    {
+      day: 7,
+      focus: 'Mock Interview, Project Narrative & Behavioral Prep',
+      task: [
+        'Practice explaining project architecture (Authentication & E-commerce) out loud using STAR method.',
+        'Conduct a mock technical interview answering core JS, React, and Node.js questions without notes.',
+        'Review and refine responses to all behavioral questions.'
+      ]
+    }
+  ]
+}
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+◇ injected env (4) from .env // tip: ⌘ override existing { override: true }
+Connect to database
+server is running on port 3000 
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+◇ injected env (4) from .env // tip: ⌘ suppress logs { quiet: true }
+Connect to database
+server is running on port 3000 
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+◇ injected env (4) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+Connect to database
+server is running on port 3000 
+{
+  matchScore: 72,
+  technicalQuestion: [
+    {
+      question: 'How does asynchronous JavaScript work under the hood, specifically regarding the event loop, microtask queue, and macrotask queue?',
+      intention: 'Evaluate deep understanding of JavaScript concurrency model, single-threaded execution, and async control flow.',
+      answerApproach: 'Explain the call stack, Web APIs, Event Loop, Microtask queue (Promises, process.nextTick), and Macrotask queue (setTimeout, setInterval). Give an example of code execution order.'
+    },
+    {
+      question: 'Can you explain how JWT-based authentication works in a MERN stack application, and how do you securely store JWT tokens on the client side?',
+      intention: "Assess candidate's grasp of authentication security, backend token generation, and frontend state management.",
+      answerApproach: 'Describe JWT structure (Header, Payload, Signature), generation on login, sending via headers/cookies, and contrast localStorage against httpOnly cookies regarding XSS and CSRF security risks.'
+    },
+    {
+      question: 'How do you optimize React component rendering performance using hooks and memoization techniques?',
+      intention: "Measure candidate's knowledge of frontend performance optimization and React re-rendering behavior.",
+      answerApproach: 'Discuss React.memo, useMemo, useCallback, Virtual DOM diffing, avoiding inline functions in renders, and managing state granularly to prevent unnecessary parent-child re-renders.'
+    },
+    {
+      question: 'How do you implement robust error handling and input validation in Express.js REST APIs to prevent application crashes?',
+      intention: 'Check backend architecture reliability, error handling middleware usage, and request sanitization practices.',
+      answerApproach: 'Explain global error handling middleware, wrapper functions for async handlers, try-catch blocks, and libraries like express-validator or Joi to sanitize and validate request payloads.'
+    },
+    {
+      question: 'What is MongoDB indexing, why is it useful, and how do you analyze slow database queries?',
+      intention: 'Test NoSQL database optimization, indexing concepts, and database performance tuning skills.',
+      answerApproach: "Define indexing (B-tree structure), single vs compound indexes, how indexing speeds up queries while slowing down writes, and using explain('executionStats') to detect unindexed collection scans."
+    },
+    {
+      question: 'How does Redux Toolkit simplify state management compared to traditional Redux, and when would you prefer local state instead?',
+      intention: 'Evaluate understanding of state management architecture, Redux Toolkit utilities, and practical decision-making.',
+      answerApproach: 'Highlight createSlice, createAsyncThunk, built-in Immer library for immutable updates, and reduced boilerplate. Contrast global state (auth, cart) with local state (form inputs, toggle flags).'
+    },
+    {
+      question: 'What are HTTP status codes, CORS policies, and essential security headers for securing Express APIs?',
+      intention: 'Test HTTP fundamentals, web security awareness, and API standards.',
+      answerApproach: 'List common HTTP codes (200, 201, 400, 401, 403, 404, 500), explain CORS mechanism and preflight OPTIONS requests, and mention security practices like Helmet middleware and rate limiting.'
+    },
+    {
+      question: 'How do you design schema relationships in MongoDB using embedding vs referencing, and what factors influence your choice?',
+      intention: 'Assess database design knowledge, data modeling tradeoffs, and schema scalability concepts.',
+      answerApproach: 'Explain embedded subdocuments (one-to-few, fast reads) versus normalized referencing (one-to-many/many-to-many, lower duplicate data). Mention MongoDB document size limit (16MB) and access patterns.'
+    }
+  ],
+  behavioralQuestion: [
+    {
+      question: 'Describe a challenging bug you encountered in your Full Stack E-commerce project and how you systematically debugged and resolved it.',
+      intention: 'Evaluate problem-solving methodology, persistence, debugging tools proficiency, and analytical thinking.',
+      answerApproach: 'Use the STAR method (Situation, Task, Action, Result). Outline the bug context, explain step-by-step isolation using console/DevTools/Postman logs, describe the fix, and mention preventive measures added.'
+    },
+    {
+      question: 'How do you prioritize development tasks when building a project from scratch with multiple complex features?',
+      intention: 'Assess project planning, task decomposition, and prioritization capability.',
+      answerApproach: 'Explain core path prioritization: setting up database models and core authentication APIs first, building component foundations, integrating state management step-by-step, and polishing UI last.'
+    },
+    {
+      question: 'Tell me about a time when you had to learn a new technology or library quickly to implement a project requirement.',
+      intention: 'Determine adaptability, continuous learning drive, and self-sufficiency.',
+      answerApproach: 'Mention learning Redux Toolkit or Tailwind CSS for a project. Detail reading documentation, testing small prototypes, integrating it cleanly, and the outcome achieved.'
+    },
+    {
+      question: 'How do you ensure your code remains clean, readable, and maintainable as your codebase grows larger?',
+      intention: 'Check adherence to software engineering standards, modular code structure, and best practices.',
+      answerApproach: 'Discuss clear folder structure (MVC/feature-based), modular reusable React components, naming conventions, DRY principle, utility functions separation, and automated formatting with ESLint/Prettier.'
+    },
+    {
+      question: 'Can you explain a technical trade-off or decision you made in one of your projects and why you chose that approach?',
+      intention: 'Assess critical thinking, technical ownership, and ability to justify design choices.',
+      answerApproach: 'Explain choosing Redux Toolkit over React Context API for complex application state like cart/auth, or JWT cookies over local storage, explaining pros, cons, and why it fit the project scope.'
+    }
+  ],
+  skillGap: [
+    {
+      skill: 'MongoDB Query Optimization and Indexing',
+      severity: 'high'
+    },
+    {
+      skill: 'TypeScript Integration for Full Stack MERN',
+      severity: 'medium'
+    },
+    {
+      skill: 'Automated Testing (Jest, Supertest, React Testing Library)',
+      severity: 'medium'
+    },
+    {
+      skill: 'Basic System Design and Caching (Redis)',
+      severity: 'medium'
+    },
+    {
+      skill: 'DevOps Foundations (Docker, CI/CD pipelines)',
+      severity: 'low'
+    }
+  ],
+  preparationPlan: [
+    {
+      day: 1,
+      focus: 'JavaScript Engine, Async Execution, and ES6+ Concepts',
+      task: [
+        'Study Event Loop, Microtask Queue, Macrotask Queue execution order with practical examples.',
+        'Practice manual implementation of Promises, async/await error handling, and closure concepts.',
+        'Solve 5 core JavaScript output prediction and scoping questions.'
+      ]
+    },
+    {
+      day: 2,
+      focus: 'Advanced React, Hooks, and Redux Toolkit Optimization',
+      task: [
+        'Review React rendering lifecycle, virtual DOM diffing, React.memo, useMemo, and useCallback.',
+        'Implement async thunks and slice state structure in Redux Toolkit for complex state flows.',
+        'Refactor an existing React component to eliminate unnecessary re-renders.'
+      ]
+    },
+    {
+      day: 3,
+      focus: 'Node.js Architecture, Express Error Handling, and API Security',
+      task: [
+        'Build a global error handling middleware and central custom Error class in Express.',
+        'Implement input validation using express-validator and rate limiting using express-rate-limit.',
+        'Study OWASP top web API vulnerabilities and standard mitigation techniques.'
+      ]
+    },
+    {
+      day: 4,
+      focus: 'MongoDB Database Modeling, Aggregations, and Indexing',
+      task: [
+        'Practice schema design for embedded subdocuments versus normalized references.',
+        'Run MongoDB query explain() execution stats to analyze index utilization.',
+        'Write 3 multi-stage MongoDB aggregation pipeline queries (lookup, group, project).'
+      ]
+    },
+    {
+      day: 5,
+      focus: 'Secure Authentication Workflows and API Design',
+      task: [
+        'Re-architect JWT authentication to store access tokens securely in httpOnly, SameSite cookies.',
+        'Implement refresh token rotation and protected route middleware on Express backend.',
+        'Test secure end-to-end authentication flow using Postman environment variables.'
+      ]
+    },
+    {
+      day: 6,
+      focus: 'Data Structures, Algorithms, and Problem Solving',
+      task: [
+        'Solve 5 LeetCode Easy/Medium problems focusing on Arrays, Strings, and Hash Maps.',
+        'Practice calculating and verbally explaining Time and Space complexity (Big-O notation).',
+        'Implement basic searching and sorting algorithms from scratch in JavaScript.'
+      ]
+    },
+    {
+      day: 7,
+      focus: 'Project Architecture Walkthrough and Mock Technical Interview',
+      task: [
+        'Prepare structured STAR stories for debugging, trade-offs, and technical challenges.',
+        'Practice explaining the E-commerce project architecture end-to-end out loud in 3 minutes.',
+        'Conduct a comprehensive self-mock technical interview covering MERN core concepts.'
+      ]
+    }
+  ]
+}
+{
+  matchScore: 72,
+  technicalQuestion: [
+    {
+      question: 'How does asynchronous JavaScript work under the hood, specifically regarding the event loop, microtask queue, and macrotask queue?',
+      intention: 'Evaluate deep understanding of JavaScript concurrency model, single-threaded execution, and async control flow.',
+      answerApproach: 'Explain the call stack, Web APIs, Event Loop, Microtask queue (Promises, process.nextTick), and Macrotask queue (setTimeout, setInterval). Give an example of code execution order.'
+    },
+    {
+      question: 'Can you explain how JWT-based authentication works in a MERN stack application, and how do you securely store JWT tokens on the client side?',
+      intention: "Assess candidate's grasp of authentication security, backend token generation, and frontend state management.",
+      answerApproach: 'Describe JWT structure (Header, Payload, Signature), generation on login, sending via headers/cookies, and contrast localStorage against httpOnly cookies regarding XSS and CSRF security risks.'
+    },
+    {
+      question: 'How do you optimize React component rendering performance using hooks and memoization techniques?',
+      intention: "Measure candidate's knowledge of frontend performance optimization and React re-rendering behavior.",
+      answerApproach: 'Discuss React.memo, useMemo, useCallback, Virtual DOM diffing, avoiding inline functions in renders, and managing state granularly to prevent unnecessary parent-child re-renders.'
+    },
+    {
+      question: 'How do you implement robust error handling and input validation in Express.js REST APIs to prevent application crashes?',
+      intention: 'Check backend architecture reliability, error handling middleware usage, and request sanitization practices.',
+      answerApproach: 'Explain global error handling middleware, wrapper functions for async handlers, try-catch blocks, and libraries like express-validator or Joi to sanitize and validate request payloads.'
+    },
+    {
+      question: 'What is MongoDB indexing, why is it useful, and how do you analyze slow database queries?',
+      intention: 'Test NoSQL database optimization, indexing concepts, and database performance tuning skills.',
+      answerApproach: "Define indexing (B-tree structure), single vs compound indexes, how indexing speeds up queries while slowing down writes, and using explain('executionStats') to detect unindexed collection scans."
+    },
+    {
+      question: 'How does Redux Toolkit simplify state management compared to traditional Redux, and when would you prefer local state instead?',
+      intention: 'Evaluate understanding of state management architecture, Redux Toolkit utilities, and practical decision-making.',
+      answerApproach: 'Highlight createSlice, createAsyncThunk, built-in Immer library for immutable updates, and reduced boilerplate. Contrast global state (auth, cart) with local state (form inputs, toggle flags).'
+    },
+    {
+      question: 'What are HTTP status codes, CORS policies, and essential security headers for securing Express APIs?',
+      intention: 'Test HTTP fundamentals, web security awareness, and API standards.',
+      answerApproach: 'List common HTTP codes (200, 201, 400, 401, 403, 404, 500), explain CORS mechanism and preflight OPTIONS requests, and mention security practices like Helmet middleware and rate limiting.'
+    },
+    {
+      question: 'How do you design schema relationships in MongoDB using embedding vs referencing, and what factors influence your choice?',
+      intention: 'Assess database design knowledge, data modeling tradeoffs, and schema scalability concepts.',
+      answerApproach: 'Explain embedded subdocuments (one-to-few, fast reads) versus normalized referencing (one-to-many/many-to-many, lower duplicate data). Mention MongoDB document size limit (16MB) and access patterns.'
+    }
+  ],
+  behavioralQuestion: [
+    {
+      question: 'Describe a challenging bug you encountered in your Full Stack E-commerce project and how you systematically debugged and resolved it.',
+      intention: 'Evaluate problem-solving methodology, persistence, debugging tools proficiency, and analytical thinking.',
+      answerApproach: 'Use the STAR method (Situation, Task, Action, Result). Outline the bug context, explain step-by-step isolation using console/DevTools/Postman logs, describe the fix, and mention preventive measures added.'
+    },
+    {
+      question: 'How do you prioritize development tasks when building a project from scratch with multiple complex features?',
+      intention: 'Assess project planning, task decomposition, and prioritization capability.',
+      answerApproach: 'Explain core path prioritization: setting up database models and core authentication APIs first, building component foundations, integrating state management step-by-step, and polishing UI last.'
+    },
+    {
+      question: 'Tell me about a time when you had to learn a new technology or library quickly to implement a project requirement.',
+      intention: 'Determine adaptability, continuous learning drive, and self-sufficiency.',
+      answerApproach: 'Mention learning Redux Toolkit or Tailwind CSS for a project. Detail reading documentation, testing small prototypes, integrating it cleanly, and the outcome achieved.'
+    },
+    {
+      question: 'How do you ensure your code remains clean, readable, and maintainable as your codebase grows larger?',
+      intention: 'Check adherence to software engineering standards, modular code structure, and best practices.',
+      answerApproach: 'Discuss clear folder structure (MVC/feature-based), modular reusable React components, naming conventions, DRY principle, utility functions separation, and automated formatting with ESLint/Prettier.'
+    },
+    {
+      question: 'Can you explain a technical trade-off or decision you made in one of your projects and why you chose that approach?',
+      intention: 'Assess critical thinking, technical ownership, and ability to justify design choices.',
+      answerApproach: 'Explain choosing Redux Toolkit over React Context API for complex application state like cart/auth, or JWT cookies over local storage, explaining pros, cons, and why it fit the project scope.'
+    }
+  ],
+  skillGap: [
+    {
+      skill: 'MongoDB Query Optimization and Indexing',
+      severity: 'high'
+    },
+    {
+      skill: 'TypeScript Integration for Full Stack MERN',
+      severity: 'medium'
+    },
+    {
+      skill: 'Automated Testing (Jest, Supertest, React Testing Library)',
+      severity: 'medium'
+    },
+    {
+      skill: 'Basic System Design and Caching (Redis)',
+      severity: 'medium'
+    },
+    {
+      skill: 'DevOps Foundations (Docker, CI/CD pipelines)',
+      severity: 'low'
+    }
+  ],
+  preparationPlan: [
+    {
+      day: 1,
+      focus: 'JavaScript Engine, Async Execution, and ES6+ Concepts',
+      task: [
+        'Study Event Loop, Microtask Queue, Macrotask Queue execution order with practical examples.',
+        'Practice manual implementation of Promises, async/await error handling, and closure concepts.',
+        'Solve 5 core JavaScript output prediction and scoping questions.'
+      ]
+    },
+    {
+      day: 2,
+      focus: 'Advanced React, Hooks, and Redux Toolkit Optimization',
+      task: [
+        'Review React rendering lifecycle, virtual DOM diffing, React.memo, useMemo, and useCallback.',
+        'Implement async thunks and slice state structure in Redux Toolkit for complex state flows.',
+        'Refactor an existing React component to eliminate unnecessary re-renders.'
+      ]
+    },
+    {
+      day: 3,
+      focus: 'Node.js Architecture, Express Error Handling, and API Security',
+      task: [
+        'Build a global error handling middleware and central custom Error class in Express.',
+        'Implement input validation using express-validator and rate limiting using express-rate-limit.',
+        'Study OWASP top web API vulnerabilities and standard mitigation techniques.'
+      ]
+    },
+    {
+      day: 4,
+      focus: 'MongoDB Database Modeling, Aggregations, and Indexing',
+      task: [
+        'Practice schema design for embedded subdocuments versus normalized references.',
+        'Run MongoDB query explain() execution stats to analyze index utilization.',
+        'Write 3 multi-stage MongoDB aggregation pipeline queries (lookup, group, project).'
+      ]
+    },
+    {
+      day: 5,
+      focus: 'Secure Authentication Workflows and API Design',
+      task: [
+        'Re-architect JWT authentication to store access tokens securely in httpOnly, SameSite cookies.',
+        'Implement refresh token rotation and protected route middleware on Express backend.',
+        'Test secure end-to-end authentication flow using Postman environment variables.'
+      ]
+    },
+    {
+      day: 6,
+      focus: 'Data Structures, Algorithms, and Problem Solving',
+      task: [
+        'Solve 5 LeetCode Easy/Medium problems focusing on Arrays, Strings, and Hash Maps.',
+        'Practice calculating and verbally explaining Time and Space complexity (Big-O notation).',
+        'Implement basic searching and sorting algorithms from scratch in JavaScript.'
+      ]
+    },
+    {
+      day: 7,
+      focus: 'Project Architecture Walkthrough and Mock Technical Interview',
+      task: [
+        'Prepare structured STAR stories for debugging, trade-offs, and technical challenges.',
+        'Practice explaining the E-commerce project architecture end-to-end out loud in 3 minutes.',
+        'Conduct a comprehensive self-mock technical interview covering MERN core concepts.'
+      ]
+    }
+  ]
+}
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+◇ injected env (4) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+Connect to database
+server is running on port 3000 
+{
+  matchScore: 75,
+  technicalQuestion: [
+    {
+      question: 'How does JWT authentication work in a MERN stack application, and how do you securely store and transmit tokens between the frontend and backend?',
+      intention: "Evaluate the candidate's depth of understanding regarding authentication, security best practices, and session management.",
+      answerApproach: 'Explain the flow: user logs in, server verifies credentials with bcrypt, generates a signed JWT, and sends it back. Discuss storing JWT in HttpOnly cookies to prevent XSS attacks versus localStorage, and using Authorization headers with Bearer tokens for API calls.'
+    },
+    {
+      question: 'Can you explain the JavaScript Event Loop, call stack, and microtask queue with an example involving Promises and setTimeout?',
+      intention: 'Assess core JavaScript asynchronous execution knowledge, which is vital for both Node.js performance and React state updates.',
+      answerApproach: 'Detail how synchronous code executes on the call stack, timers go to the macrotask queue, and resolved promises go to the microtask queue. State that microtasks are processed before the next macrotask, providing a code trace example.'
+    },
+    {
+      question: "How do React's Virtual DOM and reconciliation process work, and how does React Toolkit improve state handling over standard React state?",
+      intention: 'Test knowledge of React rendering internals, performance optimizations, and centralized state management using Redux Toolkit.',
+      answerApproach: "Explain how the Virtual DOM creates an in-memory tree, compares it with the previous snapshot using a diffing algorithm (reconciliation), and updates only changed DOM nodes. Contrast local useState with Redux Toolkit's centralized store, slices, and immer-based immutable state updates."
+    },
+    {
+      question: 'How do you handle database indexing and schema design in MongoDB for a high-traffic e-commerce application?',
+      intention: 'Measure database knowledge, focusing on query performance, data relationships, and indexing strategies.',
+      answerApproach: 'Discuss embedding vs referencing documents depending on read/write ratios. Explain single-field and compound indexes on frequently queried fields like user IDs or product categories to reduce scan times.'
+    },
+    {
+      question: 'What strategies do you use for centralized error handling and input validation in Express.js REST APIs?',
+      intention: "Evaluate the candidate's ability to build robust, secure, and maintainable backend endpoints.",
+      answerApproach: 'Describe using express error-handling middleware with four parameters (err, req, res, next). Mention validating incoming request payloads using libraries like Joi or express-validator before hitting controller logic.'
+    },
+    {
+      question: 'How do you secure Node.js REST APIs against common web security threats such as CORS, XSS, rate limiting, and NoSQL injection?',
+      intention: 'Determine security awareness and ability to implement production-grade security middleware in Express.',
+      answerApproach: 'Mention using Helmet middleware for HTTP headers, express-rate-limit to prevent brute force attacks, sanitizing inputs against NoSQL injection, and configuring explicit CORS origins.'
+    },
+    {
+      question: 'What are JavaScript closures, and how can they lead to memory leaks if improperly managed?',
+      intention: 'Check deep understanding of JavaScript scope, garbage collection, and variable lifecycle.',
+      answerApproach: 'Define a closure as a function retaining access to its outer lexical environment. Explain that keeping unintended references inside long-lived objects or global listeners prevents garbage collection, leading to memory leaks.'
+    },
+    {
+      question: 'How would you optimize the frontend performance of a React application experiencing lag during page loads and state updates?',
+      intention: 'Assess real-world debugging, profiling, and optimization skills in frontend web development.',
+      answerApproach: 'Mention code-splitting with React.lazy and Suspense, memoization using React.memo, useMemo, and useCallback, lazy loading images, and minimizing main-thread blocking by reducing bundle size.'
+    }
+  ],
+  behavioralQuestion: [
+    {
+      question: 'Tell me about a complex technical bug you encountered in your e-commerce or authentication project and the steps you took to debug and solve it.',
+      intention: 'Evaluate problem-solving methodology, persistence, and technical debugging capability.',
+      answerApproach: 'Use the STAR method. Describe the specific issue (e.g., token expiration bug or state sync failure), explain the diagnostic tools used (DevTools, Postman, backend logs), and detail the final fix.'
+    },
+    {
+      question: 'How do you approach prioritizing tasks when building a full-stack MERN application from scratch?',
+      intention: 'Assess project planning, time management, and understanding of software architecture dependencies.',
+      answerApproach: 'Explain starting with requirements analysis, database schema modeling, core authentication, key REST API endpoints, and then connecting the React frontend UI before adding polish.'
+    },
+    {
+      question: 'Describe a situation where you had to explain a complex technical decision to a non-technical peer or interviewer.',
+      intention: 'Measure communication skills and the ability to articulate technical choices clearly.',
+      answerApproach: 'Provide a concrete example such as explaining why JWT and bcrypt were chosen for security over plain session cookies, using analogies to break down technical concepts.'
+    },
+    {
+      question: 'How do you handle constructive criticism or code review feedback regarding your code quality or implementation choices?',
+      intention: 'Assess adaptability, growth mindset, and willingness to follow team standards and best practices.',
+      answerApproach: 'Emphasize taking feedback objectively, treating code reviews as learning opportunities, asking clarifying questions, and refactoring code to meet team quality standards.'
+    },
+    {
+      question: 'Can you share an example of a time when you had to learn a new tool or technology under tight time constraints?',
+      intention: 'Determine self-learning ability, adaptability, and resourcefulness.',
+      answerApproach: 'Detail learning Redux Toolkit or Tailwind CSS for a project, highlighting structured resource usage like documentation, hands-on building, and quick iteration.'
+    }
+  ],
+  skillGap: [
+    {
+      skill: 'TypeScript integration in Full Stack MERN applications',
+      severity: 'medium'
+    },
+    {
+      skill: 'Automated unit and integration testing (Jest, React Testing Library, Supertest)',
+      severity: 'medium'
+    },
+    {
+      skill: 'Advanced MongoDB concepts like Aggregation Framework and Database Indexing',
+      severity: 'medium'
+    },
+    {
+      skill: 'Containerization using Docker and CI/CD pipelines',
+      severity: 'low'
+    },
+    {
+      skill: 'Basic System Design concepts and caching strategies using Redis',
+      severity: 'low'
+    }
+  ],
+  preparationPlan: [
+    {
+      day: 1,
+      focus: 'JavaScript Core Concepts & Async Deep Dive',
+      task: [
+        'Review closures, prototypes, event loop, microtasks vs macrotasks, and Promises.',
+        'Implement custom polyfills for Array methods and Promise.all to solidify core JS fundamentals.'
+      ]
+    },
+    {
+      day: 2,
+      focus: 'React.js Optimization & Redux Toolkit',
+      task: [
+        'Practice building custom React hooks and memoizing components with React.memo, useMemo, and useCallback. atmosphere',
+        'Refactor auth state management in Redux Toolkit, ensuring proper slice structure and async thunk handling.'
+      ]
+    },
+    {
+      day: 3,
+      focus: 'Node.js, Express & REST API Security',
+      task: [
+        'Implement centralized error handling middleware and input validation using Joi or express-validator.',
+        'Add security middleware including CORS, Helmet, and express-rate-limit to an existing Express backend.'
+      ]
+    },
+    {
+      day: 4,
+      focus: 'MongoDB Indexing & Aggregation Framework',
+      task: [
+        'Practice constructing compound indexes and running explain() queries to analyze execution stats.',
+        'Write aggregation pipelines for e-commerce features like order summaries and product grouping.'
+      ]
+    },
+    {
+      day: 5,
+      focus: 'Data Structures & Algorithms Basics',
+      task: [
+        'Solve 5 LeetCode Easy/Medium array and string manipulation problems using JavaScript.',
+        'Practice searching and sorting algorithms commonly asked in technical interviews.'
+      ]
+    },
+    {
+      day: 6,
+      focus: 'System Design & Project Architectural Defense',
+      task: [
+        'Draft architecture diagrams for authentication and e-commerce projects explaining data flow.',
+        'Practice explaining project choices, trade-offs, and scalability bottlenecks out loud.'
+      ]
+    },
+    {
+      day: 7,
+      focus: 'Mock Technical & Behavioral Interview Practice',
+      task: [
+        'Conduct a timed mock interview answering technical questions on MERN stack and web security.',
+        'Prepare concise STAR-format responses for all 5 behavioral questions.'
+      ]
+    }
+  ]
+}
+{
+  matchScore: 75,
+  technicalQuestion: [
+    {
+      question: 'How does JWT authentication work in a MERN stack application, and how do you securely store and transmit tokens between the frontend and backend?',
+      intention: "Evaluate the candidate's depth of understanding regarding authentication, security best practices, and session management.",
+      answerApproach: 'Explain the flow: user logs in, server verifies credentials with bcrypt, generates a signed JWT, and sends it back. Discuss storing JWT in HttpOnly cookies to prevent XSS attacks versus localStorage, and using Authorization headers with Bearer tokens for API calls.'
+    },
+    {
+      question: 'Can you explain the JavaScript Event Loop, call stack, and microtask queue with an example involving Promises and setTimeout?',
+      intention: 'Assess core JavaScript asynchronous execution knowledge, which is vital for both Node.js performance and React state updates.',
+      answerApproach: 'Detail how synchronous code executes on the call stack, timers go to the macrotask queue, and resolved promises go to the microtask queue. State that microtasks are processed before the next macrotask, providing a code trace example.'
+    },
+    {
+      question: "How do React's Virtual DOM and reconciliation process work, and how does React Toolkit improve state handling over standard React state?",
+      intention: 'Test knowledge of React rendering internals, performance optimizations, and centralized state management using Redux Toolkit.',
+      answerApproach: "Explain how the Virtual DOM creates an in-memory tree, compares it with the previous snapshot using a diffing algorithm (reconciliation), and updates only changed DOM nodes. Contrast local useState with Redux Toolkit's centralized store, slices, and immer-based immutable state updates."
+    },
+    {
+      question: 'How do you handle database indexing and schema design in MongoDB for a high-traffic e-commerce application?',
+      intention: 'Measure database knowledge, focusing on query performance, data relationships, and indexing strategies.',
+      answerApproach: 'Discuss embedding vs referencing documents depending on read/write ratios. Explain single-field and compound indexes on frequently queried fields like user IDs or product categories to reduce scan times.'
+    },
+    {
+      question: 'What strategies do you use for centralized error handling and input validation in Express.js REST APIs?',
+      intention: "Evaluate the candidate's ability to build robust, secure, and maintainable backend endpoints.",
+      answerApproach: 'Describe using express error-handling middleware with four parameters (err, req, res, next). Mention validating incoming request payloads using libraries like Joi or express-validator before hitting controller logic.'
+    },
+    {
+      question: 'How do you secure Node.js REST APIs against common web security threats such as CORS, XSS, rate limiting, and NoSQL injection?',
+      intention: 'Determine security awareness and ability to implement production-grade security middleware in Express.',
+      answerApproach: 'Mention using Helmet middleware for HTTP headers, express-rate-limit to prevent brute force attacks, sanitizing inputs against NoSQL injection, and configuring explicit CORS origins.'
+    },
+    {
+      question: 'What are JavaScript closures, and how can they lead to memory leaks if improperly managed?',
+      intention: 'Check deep understanding of JavaScript scope, garbage collection, and variable lifecycle.',
+      answerApproach: 'Define a closure as a function retaining access to its outer lexical environment. Explain that keeping unintended references inside long-lived objects or global listeners prevents garbage collection, leading to memory leaks.'
+    },
+    {
+      question: 'How would you optimize the frontend performance of a React application experiencing lag during page loads and state updates?',
+      intention: 'Assess real-world debugging, profiling, and optimization skills in frontend web development.',
+      answerApproach: 'Mention code-splitting with React.lazy and Suspense, memoization using React.memo, useMemo, and useCallback, lazy loading images, and minimizing main-thread blocking by reducing bundle size.'
+    }
+  ],
+  behavioralQuestion: [
+    {
+      question: 'Tell me about a complex technical bug you encountered in your e-commerce or authentication project and the steps you took to debug and solve it.',
+      intention: 'Evaluate problem-solving methodology, persistence, and technical debugging capability.',
+      answerApproach: 'Use the STAR method. Describe the specific issue (e.g., token expiration bug or state sync failure), explain the diagnostic tools used (DevTools, Postman, backend logs), and detail the final fix.'
+    },
+    {
+      question: 'How do you approach prioritizing tasks when building a full-stack MERN application from scratch?',
+      intention: 'Assess project planning, time management, and understanding of software architecture dependencies.',
+      answerApproach: 'Explain starting with requirements analysis, database schema modeling, core authentication, key REST API endpoints, and then connecting the React frontend UI before adding polish.'
+    },
+    {
+      question: 'Describe a situation where you had to explain a complex technical decision to a non-technical peer or interviewer.',
+      intention: 'Measure communication skills and the ability to articulate technical choices clearly.',
+      answerApproach: 'Provide a concrete example such as explaining why JWT and bcrypt were chosen for security over plain session cookies, using analogies to break down technical concepts.'
+    },
+    {
+      question: 'How do you handle constructive criticism or code review feedback regarding your code quality or implementation choices?',
+      intention: 'Assess adaptability, growth mindset, and willingness to follow team standards and best practices.',
+      answerApproach: 'Emphasize taking feedback objectively, treating code reviews as learning opportunities, asking clarifying questions, and refactoring code to meet team quality standards.'
+    },
+    {
+      question: 'Can you share an example of a time when you had to learn a new tool or technology under tight time constraints?',
+      intention: 'Determine self-learning ability, adaptability, and resourcefulness.',
+      answerApproach: 'Detail learning Redux Toolkit or Tailwind CSS for a project, highlighting structured resource usage like documentation, hands-on building, and quick iteration.'
+    }
+  ],
+  skillGap: [
+    {
+      skill: 'TypeScript integration in Full Stack MERN applications',
+      severity: 'medium'
+    },
+    {
+      skill: 'Automated unit and integration testing (Jest, React Testing Library, Supertest)',
+      severity: 'medium'
+    },
+    {
+      skill: 'Advanced MongoDB concepts like Aggregation Framework and Database Indexing',
+      severity: 'medium'
+    },
+    {
+      skill: 'Containerization using Docker and CI/CD pipelines',
+      severity: 'low'
+    },
+    {
+      skill: 'Basic System Design concepts and caching strategies using Redis',
+      severity: 'low'
+    }
+  ],
+  preparationPlan: [
+    {
+      day: 1,
+      focus: 'JavaScript Core Concepts & Async Deep Dive',
+      task: [
+        'Review closures, prototypes, event loop, microtasks vs macrotasks, and Promises.',
+        'Implement custom polyfills for Array methods and Promise.all to solidify core JS fundamentals.'
+      ]
+    },
+    {
+      day: 2,
+      focus: 'React.js Optimization & Redux Toolkit',
+      task: [
+        'Practice building custom React hooks and memoizing components with React.memo, useMemo, and useCallback. atmosphere',
+        'Refactor auth state management in Redux Toolkit, ensuring proper slice structure and async thunk handling.'
+      ]
+    },
+    {
+      day: 3,
+      focus: 'Node.js, Express & REST API Security',
+      task: [
+        'Implement centralized error handling middleware and input validation using Joi or express-validator.',
+        'Add security middleware including CORS, Helmet, and express-rate-limit to an existing Express backend.'
+      ]
+    },
+    {
+      day: 4,
+      focus: 'MongoDB Indexing & Aggregation Framework',
+      task: [
+        'Practice constructing compound indexes and running explain() queries to analyze execution stats.',
+        'Write aggregation pipelines for e-commerce features like order summaries and product grouping.'
+      ]
+    },
+    {
+      day: 5,
+      focus: 'Data Structures & Algorithms Basics',
+      task: [
+        'Solve 5 LeetCode Easy/Medium array and string manipulation problems using JavaScript.',
+        'Practice searching and sorting algorithms commonly asked in technical interviews.'
+      ]
+    },
+    {
+      day: 6,
+      focus: 'System Design & Project Architectural Defense',
+      task: [
+        'Draft architecture diagrams for authentication and e-commerce projects explaining data flow.',
+        'Practice explaining project choices, trade-offs, and scalability bottlenecks out loud.'
+      ]
+    },
+    {
+      day: 7,
+      focus: 'Mock Technical & Behavioral Interview Practice',
+      task: [
+        'Conduct a timed mock interview answering technical questions on MERN stack and web security.',
+        'Prepare concise STAR-format responses for all 5 behavioral questions.'
+      ]
+    }
+  ]
+}
+  

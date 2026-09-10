@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import config from "../config/config.js";
 import tokenBlackListModel from "../model/tokenblacklisting.js";
- 
 
 export const registerUserController = async (req, res) => {
   try {

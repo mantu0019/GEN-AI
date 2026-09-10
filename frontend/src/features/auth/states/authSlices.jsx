@@ -76,24 +76,10 @@ const authSlice = createSlice({
         state.authData = action.payload,
         state.error = null
        }) 
-  
-    
-
-
-    
-
-
-
-
-
-
-
-
-
+   
      }
 
-
-
+ 
 
 
 })

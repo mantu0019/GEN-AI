@@ -1,13 +1,17 @@
+ 
+
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hook/useAuth";
 import Loading from "../../../components/Loading";
- 
+
 const Login = () => {
   const { loginByUser, isLoading, error } = useAuth();
+  const [submitError, setSubmitError] = useState("");
+
   const navigate = useNavigate();
- 
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -18,245 +22,423 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-
     
+      setSubmitError("");
+
+
     try {
-       
       await loginByUser(data).unwrap();
-       navigate("/dashboard/home")
-      
+
+      navigate("/dashboard/home");
+
     } catch (error) {
-      console.log("something went wrong from login data fetching", error);
+      console.log(
+        "something went wrong from login data fetching",
+        error
+      );
+       setSubmitError(
+      error?.message || "Invalid email or password"
+    );
+
     }
+
+
+
   };
 
-  if(isLoading){
-    return <Loading/>
+  if (isLoading) {
+    return <Loading />;
   }
-  
 
   return (
-    <div className="min-h-screen bg-[#071b1d] flex items-center justify-center p-4 sm:p-8">
-      {/* Main Container */}
+    <main className="min-h-screen bg-[#080808] text-white flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
 
-      <div className="w-full max-w-6xl bg-white rounded-[28px] overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-2">
-        {/* ================= LEFT SIDE ================= */}
-        <div className="relative min-h-[550px] lg:min-h-[650px] bg-[#0d657b] overflow-hidden">
-          {/* Background decoration */}
-          <div className="absolute inset-0">
-            <div className="absolute w-[500px] h-[500px] bg-[#063b49] rounded-full blur-3xl opacity-70 -top-40 -left-40" />
+      {/* ================================= */}
+      {/* BACKGROUND GLOW */}
+      {/* ================================= */}
 
-            <div className="absolute w-[400px] h-[400px] bg-[#24a7bd] rounded-full blur-3xl opacity-20 bottom-[-150px] right-[-100px]" />
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
 
-            {/* Grid */}
-            <div
-              className="absolute inset-0 opacity-10"
-              style={{
-                backgroundImage:
-                  "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
-                backgroundSize: "40px 40px",
-              }}
-            />
-          </div>
+        <div className="absolute left-[-250px] top-[-250px] h-[550px] w-[550px] rounded-full bg-orange-600/10 blur-[150px]" />
 
-          {/* Content */}
-          <div className="relative z-10 h-full flex flex-col justify-between p-8 sm:p-12">
-            {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center">
-                <span className="text-[#0d657b] font-black text-xl">AI</span>
-              </div>
+        <div className="absolute right-[-250px] top-[15%] h-[550px] w-[550px] rounded-full bg-red-600/10 blur-[160px]" />
 
-              <span className="text-white text-xl font-bold tracking-wide">
-                Genova
-              </span>
+        <div className="absolute bottom-[-300px] left-[35%] h-[500px] w-[500px] rounded-full bg-orange-500/5 blur-[150px]" />
+
+      </div>
+
+      {/* ================================= */}
+      {/* MAIN CARD */}
+      {/* ================================= */}
+
+      <div className="relative z-10 w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#111111]/90 shadow-2xl shadow-black/50 backdrop-blur-xl">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+
+          {/* ================================= */}
+          {/* LEFT SIDE */}
+          {/* ================================= */}
+
+          <div className="relative min-h-[500px] overflow-hidden border-b border-white/10 lg:border-b-0 lg:border-r">
+
+            {/* Decorative glow */}
+
+            <div className="absolute inset-0 pointer-events-none">
+
+              <div className="absolute left-[-180px] top-[-180px] h-[450px] w-[450px] rounded-full bg-orange-600/10 blur-[120px]" />
+
+              <div className="absolute bottom-[-180px] right-[-120px] h-[450px] w-[450px] rounded-full bg-red-600/10 blur-[130px]" />
+
+              {/* Grid */}
+
+              <div
+                className="absolute inset-0 opacity-[0.035]"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
+                  backgroundSize: "45px 45px",
+                }}
+              />
+
             </div>
 
-            {/* Middle */}
-            <div className="max-w-md mt-16 lg:mt-0">
-              <p className="text-white/70 text-sm font-semibold tracking-[3px] uppercase mb-5">
-                Generative Intelligence
-              </p>
+            {/* Left content */}
 
-              <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
-                Create.
-                <br />
-                Imagine.
-                <br />
-                <span className="text-[#9ce7ed]">Generate.</span>
-              </h1>
+            <div className="relative z-10 flex h-full min-h-[500px] flex-col justify-between p-6 sm:p-8 lg:p-9">
 
-              <p className="mt-6 text-white/75 text-sm sm:text-base leading-7 max-w-sm">
-                Unlock the power of AI to generate ideas, content, images and
-                experiences in seconds.
-              </p>
-            </div>
+              {/* Logo */}
 
-            {/* Bottom */}
-            <div className="flex items-end justify-between gap-5 mt-16">
-              <div>
-                <p className="text-white/50 text-xs uppercase tracking-widest">
-                  Powered by
-                </p>
+              <div className="flex items-center gap-3">
 
-                <p className="text-white font-semibold mt-1">
-                  Next Generation AI
-                </p>
-              </div>
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-400 to-red-500 shadow-lg shadow-orange-500/20">
 
-              {/* AI Circle */}
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-black flex items-center justify-center border-4 border-white/10">
-                <span className="text-[#9ce7ed] text-xs font-black tracking-widest">
-                  GEN AI
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+                  <span className="text-base font-black text-white">
+                    AI
+                  </span>
 
-        {/* ================= RIGHT SIDE ================= */}
-        <div className="bg-[#f8f8f6] flex items-center justify-center p-8 sm:p-12 lg:p-16">
-          <div className="w-full max-w-sm">
-            {/* Heading */}
-            <div className="mb-9">
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#101718]">
-                Welcome back!
-              </h2>
-
-              <p className="mt-3 text-sm text-gray-500">
-                Welcome back! Please enter your details.
-              </p>
-            </div>
-            {error && (
-              <div className="bg-red-100 text-red-600 px-4 py-2 rounded mb-4">
-                {error}
-              </div>
-            )}
-
-            {/* Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              {/* ================= EMAIL ================= */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-[#202526] mb-2"
-                >
-                  Email
-                </label>
-
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^\S+@\S+$/i,
-                      message: "Enter a valid email address",
-                    },
-                  })}
-                  className={`w-full h-12 px-4 rounded-lg border ${
-                    errors.email ? "border-red-500" : "border-gray-300"
-                  } bg-white outline-none text-sm transition focus:border-[#0d657b] focus:ring-2 focus:ring-[#0d657b]/10`}
-                />
-
-                {errors.email && (
-                  <p className="text-red-500 text-xs mt-1.5">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-
-              {/* ================= PASSWORD ================= */}
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-[#202526] mb-2"
-                >
-                  Password
-                </label>
-
-                {/* Input + Eye Button */}
-                <div className="relative">
-                  <input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters",
-                      },
-                    })}
-                    className={`w-full h-12 px-4 pr-12 rounded-lg border ${
-                      errors.password ? "border-red-500" : "border-gray-300"
-                    } bg-white outline-none text-sm transition focus:border-[#0d657b] focus:ring-2 focus:ring-[#0d657b]/10`}
-                  />
-
-                  {/* Show / Hide */}
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((prev) => !prev)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#0d657b] transition"
-                    aria-label={
-                      showPassword ? "Hide password" : "Show password"
-                    }
-                  >
-                    {showPassword ? "🙈" : "👁️"}
-                  </button>
                 </div>
 
-                {errors.password && (
-                  <p className="text-red-500 text-xs mt-1.5">
-                    {errors.password.message}
-                  </p>
-                )}
+                <span className="text-lg font-bold tracking-wide text-white">
+                  Genova
+                </span>
+
               </div>
 
-              {/* ================= REMEMBER / FORGOT ================= */}
-              <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" className="w-4 h-4 accent-[#0d657b]" />
+              {/* Hero */}
 
-                  <span className="text-xs sm:text-sm text-gray-600">
-                    Remember me
+              <div className="mt-10 max-w-md lg:mt-0">
+
+                <p className="mb-4 text-[11px] font-semibold uppercase tracking-[4px] text-orange-400">
+                  Generative Intelligence
+                </p>
+
+                <h1 className="text-3xl font-bold leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
+
+                  Prepare.
+
+                  <br />
+
+                  Practice.
+
+                  <br />
+
+                  <span className="bg-gradient-to-r from-orange-400 via-red-400 to-orange-500 bg-clip-text text-transparent">
+                    Succeed.
                   </span>
-                </label>
+
+                </h1>
+
+                <p className="mt-5 max-w-sm text-xs leading-6 text-zinc-400 sm:text-sm">
+                  Let AI analyze your skills, experience and target role
+                  to build a personalized interview preparation strategy.
+                </p>
+
+              </div>
+
+              {/* Bottom */}
+
+              <div className="mt-10 flex items-end justify-between gap-5">
+
+                <div>
+
+                  <p className="text-[10px] uppercase tracking-widest text-zinc-600">
+                    Powered by
+                  </p>
+
+                  <p className="mt-1 text-xs font-semibold text-zinc-300">
+                    Next Generation AI
+                  </p>
+
+                </div>
+
+                {/* AI Circle */}
+
+                <div className="flex h-16 w-16 items-center justify-center rounded-full border border-orange-500/20 bg-orange-500/5 shadow-[0_0_50px_rgba(249,115,22,0.08)] sm:h-20 sm:w-20">
+
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#151515] sm:h-14 sm:w-14">
+
+                    <span className="text-[9px] font-black tracking-[3px] text-orange-400">
+                      GEN AI
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* ================================= */}
+          {/* RIGHT SIDE - LOGIN */}
+          {/* ================================= */}
+
+          <div className="flex items-center justify-center bg-[#0e0e0e] p-6 sm:p-8 lg:p-12">
+
+            <div className="w-full max-w-sm">
+
+              {/* Heading */}
+
+              <div className="mb-7">
+
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/5 px-3 py-1.5">
+
+                  <span className="h-1.5 w-1.5 rounded-full bg-orange-400" />
+
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-orange-300">
+                    Welcome back
+                  </span>
+
+                </div>
+
+                <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                  Sign in
+                </h2>
+
+                <p className="mt-2 text-xs leading-6 text-zinc-500 sm:text-sm">
+                  Welcome back! Enter your details to continue.
+                </p>
+
+              </div>
+
+              {/* Error */}
+
+              {error && (
+
+                <div className="mb-4 rounded-xl border border-red-500/20 bg-red-500/5 px-4 py-2.5">
+
+                  <p className="text-xs leading-5 text-red-400">
+                    ⚠ {error}
+                    
+                  </p>
+
+                </div>
+
+              )}
+
+              {/* ================================= */}
+              {/* FORM */}
+              {/* ================================= */}
+
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+
+                {/* EMAIL */}
+
+                <div>
+
+                  <label
+                    htmlFor="email"
+                    className="mb-1.5 block text-xs font-medium text-zinc-300"
+                  >
+                    Email
+                  </label>
+
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^\S+@\S+$/i,
+                        message: "Enter a valid email address",
+                      },
+                    })}
+                    className={`h-11 w-full rounded-xl border ${
+                      errors.email
+                        ? "border-red-500/60"
+                        : "border-white/10"
+                    } bg-[#191919] px-4 text-sm text-zinc-200 outline-none transition placeholder:text-zinc-600 focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/20`}
+                  />
+
+                  {errors.email && (
+
+                    <p className="mt-1.5 text-xs text-red-400">
+                      {errors.email.message}
+                    </p>
+
+                  )}
+
+                </div>
+
+                {/* PASSWORD */}
+
+                <div>
+
+                  <label
+                    htmlFor="password"
+                    className="mb-1.5 block text-xs font-medium text-zinc-300"
+                  >
+                    Password
+                  </label>
+
+                  <div className="relative">
+
+                    <input
+                      id="password"
+                      type={
+                        showPassword
+                          ? "text"
+                          : "password"
+                      }
+                      placeholder="••••••••"
+                      {...register("password", {
+                        required: "Password is required",
+                        minLength: {
+                          value: 6,
+                          message:
+                            "Password must be at least 6 characters",
+                        },
+                      })}
+                      className={`h-11 w-full rounded-xl border ${
+                        errors.password
+                          ? "border-red-500/60"
+                          : "border-white/10"
+                      } bg-[#191919] px-4 pr-12 text-sm text-zinc-200 outline-none transition placeholder:text-zinc-600 focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/20`}
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowPassword(
+                          (prev) => !prev
+                        )
+                      }
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-zinc-500 transition hover:text-orange-400"
+                      aria-label={
+                        showPassword
+                          ? "Hide password"
+                          : "Show password"
+                      }
+                    >
+                      {showPassword ? "🙈" : "👁️"}
+                    </button>
+
+                  </div>
+
+                  {errors.password && (
+
+                    <p className="mt-1.5 text-xs text-red-400">
+                      {errors.password.message}
+                    </p>
+
+                  )}
+
+                </div>
+
+                {/* REMEMBER / FORGOT */}
+
+                <div className="flex items-center justify-between">
+
+                  <label className="flex cursor-pointer items-center gap-2">
+
+                    <input
+                      type="checkbox"
+                      className="h-4 w-4 rounded border-white/10 bg-[#191919] accent-orange-500"
+                    />
+
+                    <span className="text-xs text-zinc-500">
+                      Remember me
+                    </span>
+
+                  </label>
+
+                  <button
+                    type="button"
+                    className="text-xs font-semibold text-orange-400 transition hover:text-orange-300 hover:underline"
+                  >
+                    Forgot password?
+                  </button>
+
+                </div>
+
+                {/* LOGIN */}
 
                 <button
-                  type="button"
-                  className="text-xs sm:text-sm font-semibold text-[#0d657b] hover:underline"
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="group flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-orange-500/30 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
                 >
-                  Forgot password?
+
+                  {isSubmitting
+                    ? "Signing in..."
+                    : "Sign in"}
+
+                  {!isSubmitting && (
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      →
+                    </span>
+                  )}
+
                 </button>
+
+              </form>
+
+              {/* SIGNUP */}
+
+              <p className="mt-6 text-center text-sm text-zinc-500">
+
+                Don't have an account?{" "}
+
+                <Link
+                  to="/register"
+                  className="font-semibold text-orange-400 transition hover:text-orange-300 hover:underline"
+                >
+                  Sign up
+                </Link>
+
+              </p>
+
+              {/* Bottom text */}
+
+              <div className="mt-6 flex items-center justify-center gap-3 text-[10px] text-zinc-700">
+
+                <span>AI-Powered</span>
+
+                <span className="h-1 w-1 rounded-full bg-zinc-700" />
+
+                <span>Secure Login</span>
+
+                <span className="h-1 w-1 rounded-full bg-zinc-700" />
+
+                <span>Genova</span>
+
               </div>
 
-              {/* ================= LOGIN ================= */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full h-12 bg-[#0d657b] text-white rounded-lg font-semibold
-                disabled:opacity-60 disabled:cursor-not-allowed active:scale-95 transition"
-              >
-                {isSubmitting ? "Signing in..." : "Sign in"}
-              </button>
-            </form>
+            </div>
 
-            {/* ================= SIGNUP ================= */}
-            <p className="text-center text-sm text-gray-500 mt-8">
-              Don't have an account?{" "}
-              <Link
-                to={"/register"}
-                className="font-semibold text-[#0d657b] hover:underline"
-              >
-                Sign up
-              </Link>
-            </p>
           </div>
+
         </div>
+
       </div>
-    </div>
+
+    </main>
   );
 };
 

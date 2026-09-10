@@ -5,10 +5,9 @@ import Register from "../features/auth/pages/Register";
 import MainLayout from "../components/MainLayout";
 import GetMe from "../features/auth/pages/GetMe";
 import ProtectedRoutes from "../components/ProtectedRoutes";
-import { useAuth } from "../features/auth/hook/useAuth";
-import { useEffect } from "react";
-
  
+import Home from "../features/interview/ui/Home";
+import Interview from "../features/interview/ui/Interview";
 
 const AppRoutes = createBrowserRouter([
   {
@@ -32,7 +31,21 @@ const AppRoutes = createBrowserRouter([
       {
         path: "/dashboard",
         element: <MainLayout />,
-        children: [{ path: "home", element: <GetMe /> }],
+        children: [
+          { path: "profile", element: <GetMe /> },
+          {
+            path: "home",
+            element: <Home />,
+          },
+          {
+            path:"profile",
+            element:<GetMe/>
+          },
+          {
+            path: "interview/:interviewId",
+            element: <Interview />,
+          },
+        ],
       },
     ],
   },
