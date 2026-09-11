@@ -3,18 +3,18 @@ import { useInterview } from "../hooks/useInterview";
 import { useParams } from "react-router";
 
 const Interview = () => {
-  const {interviewId}= useParams();
-console.log(interviewId)
- 
-  const { interviewData, reportByUser } = useInterview();
+  const { interviewId } = useParams();
+const [isGeneratingResume, setIsGeneratingResume] = useState(false);
+  const { interviewData, reportByUser, generatedResumePdfByUser } =
+    useInterview();
 
   useEffect(() => {
-    const fetchInterview = async()=>{
-         if(interviewId){
-           await reportByUser( {interViewDataId:interviewId })
-         }
-    } 
-    fetchInterview()
+    const fetchInterview = async () => {
+      if (interviewId) {
+        await reportByUser({ interViewDataId: interviewId });
+      }
+    };
+    fetchInterview();
   }, [interviewId]);
 
   const data =
@@ -390,6 +390,93 @@ console.log(interviewId)
                     </div>
                   </div>
                 )}
+
+                <button
+  disabled={isGeneratingResume}
+  onClick={async () => {
+    try {
+      if (!interviewId) {
+        console.log("Id not found");
+        return;
+      }
+
+      setIsGeneratingResume(true);
+
+      const pdfBlob = await generatedResumePdfByUser(interviewId);
+
+      console.log("PDF received:", pdfBlob);
+
+      // PDF download
+      const url = window.URL.createObjectURL(
+        new Blob([pdfBlob], {
+          type: "application/pdf",
+        })
+      );
+
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "my-resume.pdf";
+
+      document.body.appendChild(link);
+      link.click();
+
+      link.remove();
+      window.URL.revokeObjectURL(url);
+
+    } catch (error) {
+      console.error("Resume generation failed:", error);
+    } finally {
+      setIsGeneratingResume(false);
+    }
+  }}
+  className="
+    group relative
+    flex items-center gap-3
+    overflow-hidden
+    rounded-xl
+    border border-orange-500/20
+    bg-[#111111]/80
+    px-5 py-2.5
+    text-sm font-medium text-zinc-300
+    shadow-lg shadow-black/30
+    backdrop-blur-xl
+    transition-all duration-300
+
+    hover:border-orange-500/50
+    hover:bg-orange-500/10
+    hover:text-orange-400
+
+    active:scale-95
+    disabled:cursor-not-allowed
+    disabled:opacity-60
+  "
+>
+  {/* Icon */}
+  <span className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-orange-500/20 bg-gradient-to-br from-orange-500/20 to-red-500/20">
+    {isGeneratingResume ? (
+      <span className="h-4 w-4 animate-spin rounded-full border-2 border-zinc-600 border-t-orange-400" />
+    ) : (
+      <span className="animate-[iconPulse_2s_ease-in-out_infinite]">
+        ✨
+      </span>
+    )}
+  </span>
+
+  {/* Text */}
+  <span className="relative">
+    {isGeneratingResume
+      ? "Generating Resume..."
+      : "Resume Download"}
+  </span>
+
+  {/* Arrow */}
+  {!isGeneratingResume && (
+    <span className="relative text-zinc-600 transition-all duration-300 group-hover:translate-x-1 group-hover:text-orange-400">
+      →
+    </span>
+  )}
+</button>
               </div>
             </aside>
 

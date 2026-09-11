@@ -119,7 +119,7 @@ const Login = () => {
                 </div>
 
                 <span className="text-lg font-bold tracking-wide text-white">
-                  Genova
+                  JobPilot AI
                 </span>
 
               </div>
@@ -368,12 +368,7 @@ const Login = () => {
 
                   </label>
 
-                  <button
-                    type="button"
-                    className="text-xs font-semibold text-orange-400 transition hover:text-orange-300 hover:underline"
-                  >
-                    Forgot password?
-                  </button>
+                   
 
                 </div>
 
@@ -426,7 +421,7 @@ const Login = () => {
 
                 <span className="h-1 w-1 rounded-full bg-zinc-700" />
 
-                <span>Genova</span>
+                <span>JobPilot AI</span>
 
               </div>
 

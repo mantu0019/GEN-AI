@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllReportUser, interviewUser, reportUser } from "./interviewAction";
+import { generatedResumePdfUser, getAllReportUser, interviewUser, reportUser } from "./interviewAction";
+ 
 
 const interviewSlice = createSlice({
   name: "interview",
@@ -41,7 +42,19 @@ const interviewSlice = createSlice({
         ((state.isLoading = false),
           (state.error = false),
           (state.interviewData = action.payload));
-      });
+      })
+    // generate pdf Resume
+     .addCase(generatedResumePdfUser.pending,(state,action)=>{
+            state.isLoading = true,
+            state.error = false
+     }).addCase(generatedResumePdfUser.fulfilled,(state,action)=>{
+       state.isLoading = false,
+       state.interviewData = action.payload
+     }).addCase(generatedResumePdfUser.rejected,(state,action)=>{
+      state.isLoading = false,
+      state.error = action.payload || "something went wrong"
+     })
+
   },
 });
 export default interviewSlice.reducer;

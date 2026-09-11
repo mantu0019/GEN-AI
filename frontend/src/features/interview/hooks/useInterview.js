@@ -5,6 +5,7 @@ import {
   interviewUser,
   reportUser,
   getAllReportUser,
+  generatedResumePdfUser,
 } from "../state/interviewAction";
 
 
@@ -41,6 +42,11 @@ export const useInterview = () => {
     [dispatch]
   );
 
+  const generatedResumePdfByUser  = useCallback((data)=>{
+    return dispatch(generatedResumePdfUser(data)).unwrap();
+  },[dispatch])
+
+
   return {
     isLoading,
     error,
@@ -48,6 +54,7 @@ export const useInterview = () => {
     interviewByUser,
     reportByUser,
     getAllReportByUser,
+    generatedResumePdfByUser
   };
 };
 

@@ -67,7 +67,7 @@ const Register = () => {
               </div>
 
               <span className="text-xl font-bold tracking-wide">
-                Genova
+                JobPilot AI
               </span>
             </div>
 
@@ -82,14 +82,12 @@ const Register = () => {
                 Build your career.
                 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
-                  Master your interview.
+                 Crack your dream job.
                 </span>
               </h1>
 
               <p className="mt-5 text-zinc-400 text-sm leading-6 max-w-sm">
-                Create your Genova account and get AI-powered interview
-                preparation, personalized questions, skill-gap analysis,
-                and a focused preparation roadmap.
+             Create your JobPilot AI account to analyze your resume, identify skill gaps, practice interviews, and follow a personalized 7-day roadmap to get job-ready.
               </p>
 
               {/* Features */}
@@ -156,7 +154,7 @@ const Register = () => {
             {/* Heading */}
             <div className="mb-5">
               <p className="text-orange-400 text-xs font-semibold uppercase tracking-[2px] mb-2">
-                Join Genova
+          JobPilot AI
               </p>
 
               <h2 className="text-3xl font-bold">
@@ -332,9 +330,9 @@ const Register = () => {
 
                 <span className="text-xs text-zinc-500">
                   I agree to{" "}
-                  <span className="text-orange-400 font-medium">
+                  <Link to={"/term-condition"}  className="text-orange-400 font-medium">
                     Terms & Conditions
-                  </span>
+                  </Link>
                 </span>
               </label>
 

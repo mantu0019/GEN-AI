@@ -1,6 +1,8 @@
 import { PDFParse } from "pdf-parse";
-import generateInterviewReport from "../services/ai.service.js";
+import generateInterviewReport, { generateResumePdf } from "../services/ai.service.js";
 import interviewReportModel from "../model/interviewReport.model.js";
+import { success } from "zod";
+import { fa } from "zod/v4/locales";
  
 export const generateInterviewReportController = async (req, res) => {
   try {
@@ -127,3 +129,50 @@ export const getAllInterview = async (req, res) => {
     });
   }
 };
+ 
+
+export const generateResumePdfController = async(req,res)=>{
+  try {
+    
+  const {interviewReportId} = req.params;
+
+   const  interviewReport = await interviewReportModel.findById(interviewReportId);
+   if(!interviewReport){
+    return res.status(404).json({
+      success:false,
+      message:"Interview Report Not Available "
+    })
+   }
+
+ const {resume,jobDescription,selfDescription} =    interviewReport
+
+ const pdfBuffer =   await generateResumePdf({resume,jobDescription,selfDescription})
+  
+ res.set({
+  "Content-Type":"application/pdf",
+  "Content-Disposition":`attachment; filename=resume_${interviewReportId}.pdf`
+ })
+
+res.send(pdfBuffer)
+
+
+
+
+
+
+
+
+
+  } catch (error) {
+    console.log("something went wrong from  generateResumePdfController",error);
+  
+    res.status(500)
+    .json({
+      success:false,
+      message:"something went wrong from  generateResumePdfController"
+    })
+  }
+}
+
+
+

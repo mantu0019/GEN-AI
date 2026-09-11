@@ -26,7 +26,9 @@ export const interview = async ({
 
 export const report = async ({ interViewDataId }) => {
   try {
-    const res = await authInstanceApi.get( `/api/interview/report/${interViewDataId}`);
+    const res = await authInstanceApi.get(
+      `/api/interview/report/${interViewDataId}`,
+    );
     return res.data;
   } catch (error) {
     console.log("something went wrong from service report", error);
@@ -40,6 +42,40 @@ export const getAllReport = async () => {
     return res.data;
   } catch (error) {
     console.log("something went wrong from services getAllReport", error);
+    throw error;
+  }
+};
+
+// export const generateResumePdf = async (interviewReportId) => {
+//   try {
+//     const res = await authInstanceApi.post(`/api/interview/resume/pdf/${interviewReportId}`);
+
+//     return res.data;
+//   } catch (error) {
+//     console.log("something went wrong from services generateResumePdf");
+//     throw error;
+//   }
+// };
+
+
+
+export const generateResumePdf = async (interviewReportId) => {
+  try {
+    const res = await authInstanceApi.post(
+      `/api/interview/resume/pdf/${interviewReportId}`,
+      {},
+      {
+        responseType: "blob",
+      }
+    );
+
+    return res.data;
+  } catch (error) {
+    console.log(
+      "something went wrong from services generateResumePdf",
+      error
+    );
+
     throw error;
   }
 };
