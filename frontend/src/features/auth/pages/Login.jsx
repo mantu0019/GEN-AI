@@ -227,7 +227,7 @@ const Login = () => {
 
               {error && (
 
-                <div className="mb-4 rounded-xl border border-red-500/20 bg-red-500/5 px-4 py-2.5">
+                <div className="mb-4 rounded-xl border flex items-center justify-center border-red-500/20 capitalize bg-red-500/5 px-4 py-2.5">
 
                   <p className="text-xs leading-5 text-red-400">
                     ⚠ {error}

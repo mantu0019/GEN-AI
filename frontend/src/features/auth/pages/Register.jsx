@@ -168,7 +168,7 @@ const Register = () => {
 
             {/* Error */}
             {error && (
-              <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-3 py-2 rounded-lg text-sm mb-4">
+              <div className="bg-red-500/10 border flex items-center justify-center capitalize border-red-500/20 text-red-400 px-3 py-2 rounded-lg text-sm mb-4">
                 {error}
               </div>
             )}
